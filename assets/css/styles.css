@@ -54,6 +54,20 @@
   min-height: 250px;
 }
 
+
+.appliedMobile {
+  background: rgba(170, 161, 200, 0.75);
+}
+
+.heardBackMobile {
+  background: rgba(213, 198, 224, 0.75);
+}
+
+.offerMobile {
+  background: rgba(245, 230, 232, 0.75);
+}
+
+
 .card-footer {
   background-color: white;
 }
