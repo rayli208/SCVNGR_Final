@@ -1,0 +1,18 @@
+{
+  "name": "newDatabaseS",
+  "version": "1.0.0",
+  "description": "This is the SCVNGR app redone in react.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.16.4",
+    "express-list-endpoints": "^4.0.0",
+    "mongoose": "^5.4.19"
+  }
+}
