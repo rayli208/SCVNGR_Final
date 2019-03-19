@@ -36,17 +36,6 @@
   width: 100%;
 }
 
-#applied {
-  background: rgba(170, 161, 200, 0.75);
-}
-
-#heardBack {
-  background: rgba(213, 198, 224, 0.75);
-}
-
-#offer {
-  background: rgba(245, 230, 232, 0.75);
-}
 
 #applied,
 #heardBack,
@@ -263,6 +252,32 @@ button h5 {
   color: #fff;
   background-color: #c49991;
   border-color: #c49991;
+}
+
+.button-mobile{
+  text-decoration: none;
+  color: #b38c84;
+  text-transform: uppercase;
+  font-size: 1em;
+}
+
+.button-mobile:hover, .button-mobile:link, .button-mobile:active, .button-mobile:visited{
+  text-decoration: none !important;
+  color: #b38c84;
+  text-transform: uppercase;
+  font-size: 1em;
+}
+
+.button-mobile-applied, #applied{
+  background: #BFB9D5;
+
+}
+.button-mobile-heardBack, #heardBack{
+  background: #E0D4E7;
+}
+.button-mobile-offer, #offer{
+  background: #F8ECEE;
+
 }
 
 
