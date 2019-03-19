@@ -1,0 +1,242 @@
+* {
+  font-family: ‘Raleway’, sans-serif;
+}
+
+.jumbotron {
+  margin-bottom: 0;
+  border-bottom: white 2px solid;
+  background-image: linear-gradient(to bottom right, #2e003e, #c49991);
+}
+
+.navbar {
+  border-top: white 2px solid;
+  background-image: linear-gradient(to bottom right, #2e003e, #c49991);
+}
+
+.white-header {
+  color: white;
+}
+.white-secondary {
+  color: white;
+}
+
+.white {
+  color: #2e003e;
+  text-align: center;
+  padding-top: 20px;
+}
+
+.image-box {
+  width: 60%;
+  margin: 0 auto;
+  align-items: center;
+}
+
+.home-image {
+  width: 100%;
+}
+
+#applied {
+  background: rgba(170, 161, 200, 0.75);
+}
+
+#heardBack {
+  background: rgba(213, 198, 224, 0.75);
+}
+
+#offer {
+  background: rgba(245, 230, 232, 0.75);
+}
+
+#applied,
+#heardBack,
+#offer {
+  min-height: 250px;
+}
+
+.card-footer {
+  background-color: white;
+}
+
+/*ACTION BUTTONS*/
+
+.fa-angle-double-right {
+  font-size: 18px;
+  padding: 7px 7px;
+  color: orange;
+  float: right;
+
+}
+
+.fa-angle-double-right:hover {
+  transition: 1s;
+  font-size: 20px;
+  border: 1px orange solid;
+  border-radius: 50%;
+}
+
+.fa-edit {
+  font-size: 18px;
+  padding: 7px 7px;
+  color: green;
+  float: right;
+
+}
+
+.fa-edit:hover {
+  transition: 1s;
+  font-size: 20px;
+  border: 1px green solid;
+  border-radius: 50%;
+}
+
+.fa-trash-alt {
+  font-size: 18px;
+  padding: 7px 7px;
+  color: darkred;
+  float: right;
+}
+
+.fa-trash-alt:hover {
+  transition: 1s;
+  font-size: 20px;
+  border: 1px darkred solid;
+  border-radius: 50%;
+}
+
+/*BACKGROUNDS*/
+.bg-dpurp {
+  background: #aaa1c8;
+}
+
+.bg-purp {
+  background: #d5c6e0;
+}
+
+.bg-lpurp {
+  background: #f5e6e8;
+}
+
+.background-gradient {
+  height: 100vh;
+  background-color: #2e003e; /* For browsers that do not support gradients */
+  background-image: linear-gradient(
+    to bottom right,
+    #2e003e,
+    #c49991
+  ); /* Standard syntax (must be last) */
+  display: flex;
+  align-items: center;
+}
+
+.logoHeader {
+  width: 75%;
+}
+
+.bg-purple {
+  color: #fff;
+  background-image: linear-gradient(to bottom right, #2e003e, #c49991);
+}
+
+.bg-pink {
+  background-image: linear-gradient(to bottom right, #c49991, #2e003e);
+}
+
+.side-borders {
+  border-left: 1px white solid;
+  border-right: 1px white solid;
+}
+
+.side-borders:hover {
+  border-left: 1px white solid;
+  border-right: 1px white solid;
+}
+
+.text-dimmed {
+  color: #c9bdbe;
+}
+
+.card button,
+button h5 {
+  width: 100%;
+  min-height: 30px;
+}
+
+#giantContainer .row {
+  margin: 0;
+}
+
+/*BUTTONS*/
+
+.btn-primary {
+  color: #2e003e;
+  border: #2e003e 1px solid;
+  background-color: white;
+}
+
+.btn-primary:hover {
+  color: white;
+  border: #2e003e 1px solid;
+  background-color: #2e003e;
+}
+
+.btn-primary:active {
+  color: white !important;
+  border: #2e003e 1px solid !important;
+  background-color: #2e003e !important;
+}
+
+.cancel {
+  color: #c49991;
+  border: #c49991 1px solid;
+  background-color: white;
+}
+
+.cancel:hover {
+  color: white;
+  border: #c49991 1px solid;
+  background-color: #c49991;
+}
+
+.cancel:active {
+  color: white !important;
+  border: #c49991 1px solid !important;
+  background-color: #c49991 !important;
+}
+
+#btn-login {
+  margin-top: 4%;
+  font-family: ‘Raleway’, sans-serif;
+}
+
+#btn-signout {
+  position: absolute;
+  top: 0;
+  right: 0;
+  margin-top: 1%;
+  margin-right: 1%;
+}
+
+.btn-pink {
+  color: #fff;
+  background-color: #c49991;
+  border-color: #c49991;
+}
+
+.btn-pink:hover {
+  color: #fff;
+  background-color: #b38c84;
+  border-color: #b38c84;
+}
+
+.btn-outline-pink {
+  color: #c49991;
+  border-color: #c49991;
+  background-color: rgba(0, 0, 0, 0);
+}
+
+.btn-outline-pink:hover {
+  color: #fff;
+  background-color: #c49991;
+  border-color: #c49991;
+}
