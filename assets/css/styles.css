@@ -104,6 +104,16 @@
   border-radius: 50%;
 }
 
+.nav-icon{
+  padding: 15px 0;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.nav-icon:hover{
+  color: #aaa1c8;
+}
+
 /*BACKGROUNDS*/
 .bg-dpurp {
   background: #aaa1c8;
