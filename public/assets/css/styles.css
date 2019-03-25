@@ -1,5 +1,9 @@
-* {
-  font-family: ‘Raleway’, sans-serif;
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Raleway', sans-serif;
 }
 
 .jumbotron {
@@ -317,3 +321,55 @@ transform: rotate(5deg);
   -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=20)";
   filter: alpha(opacity=20);
 }
+
+.arrow,
+.arrow:before {
+  position: absolute;
+  left: 50%;
+}
+
+.arrow {
+  width: 25px;
+  height: 25px;
+  top: 95%;
+  margin: -20px 0 0 -20px;
+  transform: rotate(45deg);
+  border-left: none;
+  border-top: none;
+  border-right: 2px #c49991 solid;
+  border-bottom: 2px #c49991 solid;
+}
+  
+.arrow:before {
+  content: '';
+  width: 20px;
+  height: 20px;
+  top: 50%;
+  margin: -10px 0 0 -10px;
+  border-left: none;
+  border-top: none;
+  border-right: 1px #2e003e solid;
+  border-bottom: 1px #2e003e solid;
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-name: arrow;
+}
+  
+@keyframes arrow {
+  0%
+    {opacity: 1}
+  100%
+    {opacity: 0;
+    transform: translate(-10px, -10px)}
+  }
+
+
+
+  #section2 {
+    height: 100%;
+    width: 100%;
+  }
+
+  .bg-container {
+    background-color: lightgray;
+  }
