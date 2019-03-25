@@ -22,7 +22,7 @@ router.route("/register").get(function (req, res) {
   res.sendFile(path.join(__dirname, "../../public/dashboard.html"));
 });
 
-router.route("/dashboard/chart").get((req, res) => {
+router.route("/chart").get((req, res) => {
   res.sendFile(path.join(__dirname, "../../public/chart.html"));
 });
 
