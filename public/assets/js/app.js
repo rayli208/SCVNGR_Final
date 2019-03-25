@@ -68,9 +68,6 @@ const submitJob = (job) => {
 
 
 
-
-
-
 //DRAG EVEN SECTION
   var drake = dragula([
     document.getElementById("applied"),
