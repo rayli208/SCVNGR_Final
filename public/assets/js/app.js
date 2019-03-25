@@ -26,7 +26,7 @@ $("#submit").on("click", function() {
     link: $("#totalSlept").val(),
     location: $("#location").val(),
     salary: $("#salary").val(),
-    body: JSON.stringify($("#text-area").html())
+    info: $("#text-area").val()
   };
   submitJob(newJob);
 });
