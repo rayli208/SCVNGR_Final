@@ -36,7 +36,6 @@ router.get("/logout", function (req, res) {
   res.redirect("/");
 });
 
-
 router
   .route("*")
   .get((req, res) => {

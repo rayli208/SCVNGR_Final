@@ -1,5 +1,6 @@
 const appliedHeardBack = id => {
   $.get(`/api/applied/${id}`, function(data) {
+    console.log(data);
     var card_id = data[0]._id;
     var company = data[0].company;
     var job_title = data[0].job_title;
