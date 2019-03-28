@@ -52,6 +52,12 @@ module.exports = {
       .then(AppliedDB => console.log(AppliedDB))
       .catch(err => console.log(err))
       .finally(res.end());
-  }
+  },
+
+  findJob: function(req, res) {
+    db.Applied.find({ _id: req.params.id })
+      .then(AppliedDB => res.json(AppliedDB))
+      .catch(err => console.log(err))
+  },
 
 }
