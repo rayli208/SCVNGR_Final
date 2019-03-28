@@ -36,7 +36,7 @@ const loadAllJobs = () => {
         var location = data[i].location;
         var info = data[i].info;
         var date_created = data[i].date_created;
-        var stamp = moment(date_created).format("lll");
+        var stamp = moment(date_created).format("l");
 
 
         var card = `
