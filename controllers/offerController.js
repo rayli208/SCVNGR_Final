@@ -52,6 +52,12 @@ module.exports = {
       .then(OfferDB => console.log(OfferDB))
       .catch(err => console.log(err))
       .finally(res.end());
-  }
+  },
+
+  findJob: function(req, res) {
+    db.Offer.find({ _id: req.params.id })
+      .then(OfferDB => res.json(OfferDB))
+      .catch(err => console.log(err))
+  },
 
 }

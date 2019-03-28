@@ -52,6 +52,12 @@ module.exports = {
       .then(HeardBackDB => console.log(HeardBackDB))
       .catch(err => console.log(err))
       .finally(res.end());
-  }
+  },
+
+  findJob: function(req, res) {
+    db.HeardBack.find({ _id: req.params.id })
+      .then(HeardBackDB => res.json(HeardBackDB))
+      .catch(err => console.log(err))
+  },
 
 }
