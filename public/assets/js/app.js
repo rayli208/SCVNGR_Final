@@ -21,6 +21,7 @@ $(document).ready(function() {
     $.get(`/api/applied/`, function(data) {
       if (data.length !== 0) {
         var applied = document.getElementById("applied");
+        var appliedMobile = document.getElementById("collapseMobileOne");
         for (var i = data.length - 1; i + 1 > data.length - data.length; i--) {
           var card_id = data[i]._id;
           var company = data[i].company;
@@ -70,7 +71,45 @@ $(document).ready(function() {
   </div>
           `;
 
+          var mini_card = `
+          <div id="${card_id}" class="shadow-lg card mx-auto mb-3 mt-2" style="width: 18rem;">
+      <div class="card-top">
+        <button class="btn card-header bg-purple" type="button" data-toggle="collapse" data-target="#cardCollapse${card_id}"
+          aria-expanded="false" aria-controls="cardCollapse${card_id}">
+          <h5 class="card-title">${company}</h5>
+          <h6 class="card-subtitle mb-2 text-dimmed">${job_title}</h6>
+        </button>
+      </div>
+      <div class="card-body collapse text-center" id="cardCollapse${card_id}">
+        <h6 class="pb-1">Contact Info:</h6>
+        <div class="btn-group pb-2" role="group" aria-label="Basic example">
+          <a class="btn btn-pink side-borders" href="tel:${phone_number}"> <i class="fas fa-phone"></i></a>
+          <a class="btn btn-pink side-borders" href="mailto:${email}""> <i class="fas fa-envelope"></i></a> 
+          <a class="btn btn-pink side-borders" target="_blank" href="https://${link}"> <i class="fas fa-link"></i></a>
+        </div>
+        <ul class="list-group">
+          <li class="list-group-item">
+            <i class="fas fa-map-pin"></i> ${location}
+          </li>
+          <li class="list-group-item">
+            <i class="fas fa-dollar-sign"></i> <span class="salary">${salary}</span>
+          </li>
+          <li class="list-group-item">
+            <i class="fas fa-info-circle"></i><span class="info">${info}</span>
+          </li>
+        </ul>
+      </div>
+      <div class="card-footer">
+      <span class="text-muted"> Applied:  ${stamp} </span>
+        <i class="fas fa-trash-alt trash"></i>
+        <i class="fas fa-arrow-right"></i>
+        <i class="fas fa-edit edit"></i>
+      </div>
+    </div>
+            `;
+
           applied.innerHTML = applied.innerHTML += card;
+          appliedMobile.innerHTML = appliedMobile.innerHTML += mini_card;
         }
       }
     });
@@ -78,6 +117,7 @@ $(document).ready(function() {
     $.get(`/api/heardback/`, function(data) {
       if (data.length !== 0) {
         var heardBack = document.getElementById("heardBack");
+        var heardMobile = document.getElementById("collapseTwo");
         for (var i = data.length - 1; i + 1 > data.length - data.length; i--) {
           var card_id = data[i]._id;
           var company = data[i].company;
@@ -127,7 +167,46 @@ $(document).ready(function() {
   </div>
           `;
 
+          var mini_card = `
+          <div id="${card_id}" class="shadow-lg card mx-auto mb-3 mt-2" style="width: 18rem;">
+      <div class="card-top">
+        <button class="btn card-header bg-purple" type="button" data-toggle="collapse" data-target="#cardCollapse${card_id}"
+          aria-expanded="false" aria-controls="cardCollapse${card_id}">
+          <h5 class="card-title">${company}</h5>
+          <h6 class="card-subtitle mb-2 text-dimmed">${job_title}</h6>
+        </button>
+      </div>
+      <div class="card-body collapse text-center" id="cardCollapse${card_id}">
+        <h6 class="pb-1">Contact Info:</h6>
+        <div class="btn-group pb-2" role="group" aria-label="Basic example">
+          <a class="btn btn-pink side-borders" href="tel:${phone_number}"> <i class="fas fa-phone"></i></a>
+          <a class="btn btn-pink side-borders" href="mailto:${email}""> <i class="fas fa-envelope"></i></a> 
+          <a class="btn btn-pink side-borders" target="_blank" href="https://${link}"> <i class="fas fa-link"></i></a>
+        </div>
+        <ul class="list-group">
+          <li class="list-group-item">
+            <i class="fas fa-map-pin"></i> ${location}
+          </li>
+          <li class="list-group-item">
+            <i class="fas fa-dollar-sign"></i> <span class="salary">${salary}</span>
+          </li>
+          <li class="list-group-item">
+            <i class="fas fa-info-circle"></i><span class="info">${info}</span>
+          </li>
+        </ul>
+      </div>
+      <div class="card-footer">
+      <span class="text-muted"> Applied:  ${stamp} </span>
+        <i class="fas fa-trash-alt trash"></i>
+        <i class="fas fa-arrow-right"></i>
+        <i class="fas fa-edit edit"></i>
+      </div>
+    </div>
+            `;
+
           heardBack.innerHTML = heardBack.innerHTML += card;
+          heardMobile.innerHTML = heardMobile.innerHTML += mini_card;
+
         }
       }
     });
@@ -135,6 +214,8 @@ $(document).ready(function() {
     $.get(`/api/offer/`, function(data) {
       if (data.length !== 0) {
         var offer = document.getElementById("offer");
+        var offerMobile = document.getElementById("collapseThree");
+
         for (var i = data.length - 1; i + 1 > data.length - data.length; i--) {
           var card_id = data[i]._id;
           var company = data[i].company;
@@ -184,7 +265,46 @@ $(document).ready(function() {
   </div>
           `;
 
+          var mini_card = `
+          <div id="${card_id}" class="shadow-lg card mx-auto mb-3 mt-2" style="width: 18rem;">
+      <div class="card-top">
+        <button class="btn card-header bg-purple" type="button" data-toggle="collapse" data-target="#cardCollapse${card_id}"
+          aria-expanded="false" aria-controls="cardCollapse${card_id}">
+          <h5 class="card-title">${company}</h5>
+          <h6 class="card-subtitle mb-2 text-dimmed">${job_title}</h6>
+        </button>
+      </div>
+      <div class="card-body collapse text-center" id="cardCollapse${card_id}">
+        <h6 class="pb-1">Contact Info:</h6>
+        <div class="btn-group pb-2" role="group" aria-label="Basic example">
+          <a class="btn btn-pink side-borders" href="tel:${phone_number}"> <i class="fas fa-phone"></i></a>
+          <a class="btn btn-pink side-borders" href="mailto:${email}""> <i class="fas fa-envelope"></i></a> 
+          <a class="btn btn-pink side-borders" target="_blank" href="https://${link}"> <i class="fas fa-link"></i></a>
+        </div>
+        <ul class="list-group">
+          <li class="list-group-item">
+            <i class="fas fa-map-pin"></i> ${location}
+          </li>
+          <li class="list-group-item">
+            <i class="fas fa-dollar-sign"></i> <span class="salary">${salary}</span>
+          </li>
+          <li class="list-group-item">
+            <i class="fas fa-info-circle"></i><span class="info">${info}</span>
+          </li>
+        </ul>
+      </div>
+      <div class="card-footer">
+      <span class="text-muted"> Applied:  ${stamp} </span>
+        <i class="fas fa-trash-alt trash"></i>
+        <i class="fas fa-arrow-right"></i>
+        <i class="fas fa-edit edit"></i>
+      </div>
+    </div>
+            `;
+
           offer.innerHTML = offer.innerHTML += card;
+          offerMobile.innerHTML = offerMobile.innerHTML += mini_card;
+
         }
       }
     });
@@ -199,7 +319,7 @@ $(document).ready(function() {
       job_title: $("#title").val(),
       phone_number: $("#phone").val(),
       email: $("#email").val(),
-      link: $("#totalSlept").val(),
+      link: $("#link").val(),
       location: $("#location").val(),
       salary: $("#salary").val(),
       info: JSON.stringify($("#info").html())
@@ -226,7 +346,6 @@ $(document).ready(function() {
     });
   };
 
-  
   //DRAG EVEN SECTION
   var drake = dragula([
     document.getElementById("applied"),
