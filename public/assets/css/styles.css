@@ -98,6 +98,21 @@ body {
   border-radius: 50%;
 }
 
+.fa-arrow-right {
+  font-size: 18px;
+  padding: 7px 7px;
+  color: orange;
+  float: right;
+
+}
+
+.fa-arrow-right:hover {
+  transition: 1s;
+  font-size: 20px;
+  border: 1px orange solid;
+  border-radius: 50%;
+}
+
 .fa-trash-alt {
   font-size: 18px;
   padding: 7px 7px;
