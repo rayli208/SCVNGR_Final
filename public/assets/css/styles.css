@@ -6,6 +6,10 @@ body {
   font-family: 'Raleway', sans-serif;
 }
 
+a {
+  color: #2e003e
+}
+
 .jumbotron {
   margin-bottom: 0;
   border-bottom: white 2px solid;
@@ -15,6 +19,10 @@ body {
 .navbar {
   border-top: white 2px solid;
   background-image: linear-gradient(to bottom right, #2e003e, #c49991);
+}
+
+.navbar a {
+  color: white;
 }
 
 .white-header {
