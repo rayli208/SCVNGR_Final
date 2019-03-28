@@ -5,7 +5,7 @@ router.route("/").get(function (req, res) {
   if (req.user) {
     return res.redirect(`/dashboard`);
   }
-  res.sendFile(path.join(__dirname, "../../public/home.html"));
+  res.sendFile(path.join(__dirname, "../../public/index.html"));
 });
 
 router.route("/dashboard").get(function (req, res) {
@@ -22,11 +22,11 @@ router.route("/register").get(function (req, res) {
   res.sendFile(path.join(__dirname, "../../public/dashboard.html"));
 });
 
-router.route("/dashboard/chart").get((req, res) => {
+router.route("/chart").get((req, res) => {
   res.sendFile(path.join(__dirname, "../../public/chart.html"));
 });
 
-router.route("/dashboard/user").get((req, res) => {
+router.route("/user").get((req, res) => {
   res.sendFile(path.join(__dirname, "../../public/user.html"));
 })
 

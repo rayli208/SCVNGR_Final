@@ -12,7 +12,8 @@ router
 router
   .route('/:id')
     .put(heardbackController.updateJob)
-    .delete(heardbackController.deleteJob)
+    .get(heardbackController.findJob)
+    .delete(heardbackController.deleteJob);
 
 module.exports = router;
   

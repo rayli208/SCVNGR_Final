@@ -12,7 +12,8 @@ router
 router
   .route('/:id')
     .put(appliedController.updateJob)
-    .delete(appliedController.deleteJob)
+    .get(appliedController.findJob)
+    .delete(appliedController.deleteJob);
 
 module.exports = router;
   
