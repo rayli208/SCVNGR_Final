@@ -1,5 +1,5 @@
 //DISPLAY EITHER MOBILE OR DESKTOP DEPENDING ON SCREEN SIZE
-function checkSize(){
+function checkSize() {
   if ($(window).width() >= 920) {
     $("#desktop-container").show();
     $("#mobile-container").hide();
@@ -13,33 +13,28 @@ checkSize();
 $(document).ready(function() {
   //ON SCREEN SIZE CHECK TO SEE IF MOBILE OR DESKTOP
   $(window).resize(function() {
-    checkSize()
+    checkSize();
   });
 
+  //LOADING UP ALL JOBS
+  const loadAllJobs = () => {
+    $.get(`/api/applied/`, function(data) {
+      if (data.length !== 0) {
+        var applied = document.getElementById("applied");
+        for (var i = data.length - 1; i + 1 > data.length - data.length; i--) {
+          var card_id = data[i]._id;
+          var company = data[i].company;
+          var job_title = data[i].job_title;
+          var phone_number = data[i].phone_number;
+          var email = data[i].email;
+          var link = data[i].link;
+          var salary = data[i].salary;
+          var location = data[i].location;
+          var info = data[i].info;
+          var date_created = data[i].date_created;
+          var stamp = moment(date_created).format("lll");
 
-
-
-  
-//LOADING UP ALL JOBS
-const loadAllJobs = () => {
-  $.get(`/api/applied/`, function (data) {
-    if (data.length !== 0) {
-      var applied = document.getElementById("applied");
-      for (var i = data.length - 1; i + 1 > (data.length - data.length); i--) {
-        var card_id = data[i]._id;
-        var company = data[i].company;
-        var job_title = data[i].job_title;
-        var phone_number = data[i].phone_number;
-        var email = data[i].email;
-        var link = data[i].link;
-        var salary = data[i].salary;
-        var location = data[i].location;
-        var info = data[i].info;
-        var date_created = data[i].date_created;
-        var stamp = moment(date_created).format("lll");
-
-
-        var card = `
+          var card = `
         <div id="${card_id}" class="shadow-lg card mx-auto mb-3 mt-2" style="width: 18rem;">
     <div class="card-top">
       <button class="btn card-header bg-purple" type="button" data-toggle="collapse" data-target="#cardCollapse${card_id}"
@@ -75,29 +70,28 @@ const loadAllJobs = () => {
   </div>
           `;
 
-        applied.innerHTML = applied.innerHTML += card;
+          applied.innerHTML = applied.innerHTML += card;
+        }
       }
-    }
-  });
-  
-  $.get(`/api/heardback/`, function (data) {
-    if (data.length !== 0) {
-      var heardBack = document.getElementById("heardBack");
-      for (var i = data.length - 1; i + 1 > (data.length - data.length); i--) {
-        var card_id = data[i]._id;
-        var company = data[i].company;
-        var job_title = data[i].job_title;
-        var phone_number = data[i].phone_number;
-        var email = data[i].email;
-        var link = data[i].link;
-        var salary = data[i].salary;
-        var location = data[i].location;
-        var info = data[i].info;
-        var date_created = data[i].date_created;
-        var stamp = moment(date_created).format("lll");
+    });
 
+    $.get(`/api/heardback/`, function(data) {
+      if (data.length !== 0) {
+        var heardBack = document.getElementById("heardBack");
+        for (var i = data.length - 1; i + 1 > data.length - data.length; i--) {
+          var card_id = data[i]._id;
+          var company = data[i].company;
+          var job_title = data[i].job_title;
+          var phone_number = data[i].phone_number;
+          var email = data[i].email;
+          var link = data[i].link;
+          var salary = data[i].salary;
+          var location = data[i].location;
+          var info = data[i].info;
+          var date_created = data[i].date_created;
+          var stamp = moment(date_created).format("lll");
 
-        var card = `
+          var card = `
         <div id="${card_id}" class="shadow-lg card mx-auto mb-3 mt-2" style="width: 18rem;">
     <div class="card-top">
       <button class="btn card-header bg-purple" type="button" data-toggle="collapse" data-target="#cardCollapse${card_id}"
@@ -133,29 +127,28 @@ const loadAllJobs = () => {
   </div>
           `;
 
-        heardBack.innerHTML = heardBack.innerHTML += card;
+          heardBack.innerHTML = heardBack.innerHTML += card;
+        }
       }
-    }
-  });
+    });
 
-  $.get(`/api/offer/`, function (data) {
-    if (data.length !== 0) {
-      var offer = document.getElementById("offer");
-      for (var i = data.length - 1; i + 1 > (data.length - data.length); i--) {
-        var card_id = data[i]._id;
-        var company = data[i].company;
-        var job_title = data[i].job_title;
-        var phone_number = data[i].phone_number;
-        var email = data[i].email;
-        var link = data[i].link;
-        var salary = data[i].salary;
-        var location = data[i].location;
-        var info = data[i].info;
-        var date_created = data[i].date_created;
-        var stamp = moment(date_created).format("lll");
+    $.get(`/api/offer/`, function(data) {
+      if (data.length !== 0) {
+        var offer = document.getElementById("offer");
+        for (var i = data.length - 1; i + 1 > data.length - data.length; i--) {
+          var card_id = data[i]._id;
+          var company = data[i].company;
+          var job_title = data[i].job_title;
+          var phone_number = data[i].phone_number;
+          var email = data[i].email;
+          var link = data[i].link;
+          var salary = data[i].salary;
+          var location = data[i].location;
+          var info = data[i].info;
+          var date_created = data[i].date_created;
+          var stamp = moment(date_created).format("lll");
 
-
-        var card = `
+          var card = `
         <div id="${card_id}" class="shadow-lg card mx-auto mb-3 mt-2" style="width: 18rem;">
     <div class="card-top">
       <button class="btn card-header bg-purple" type="button" data-toggle="collapse" data-target="#cardCollapse${card_id}"
@@ -191,81 +184,299 @@ const loadAllJobs = () => {
   </div>
           `;
 
-        offer.innerHTML = offer.innerHTML += card;
+          offer.innerHTML = offer.innerHTML += card;
+        }
       }
-    }
-  });
-}
-
-loadAllJobs();
-
-//CREATING A NEW JOB BY SUBMITTING IT
-$("#submit").on("click", function() {
-  const newJob = {
-    company: $("#company").val(),
-    job_title: $("#title").val(),
-    phone_number: $("#phone").val(),
-    email: $("#email").val(),
-    link: $("#totalSlept").val(),
-    location: $("#location").val(),
-    salary: $("#salary").val(),
-    info: JSON.stringify($("#info").html())
+    });
   };
-  submitJob(newJob);
-});
 
-const submitJob = (job) => {
-  console.log(job);
-  $.ajax({
-    method: "POST",
-    url: "/api/applied",
-    data: job
-  })
-    .then(function() {
+  loadAllJobs();
+
+  //CREATING A NEW JOB BY SUBMITTING IT
+  $("#submit").on("click", function() {
+    const newJob = {
+      company: $("#company").val(),
+      job_title: $("#title").val(),
+      phone_number: $("#phone").val(),
+      email: $("#email").val(),
+      link: $("#totalSlept").val(),
+      location: $("#location").val(),
+      salary: $("#salary").val(),
+      info: JSON.stringify($("#info").html())
+    };
+    submitJob(newJob);
+  });
+
+  const submitJob = job => {
+    console.log(job);
+    $.ajax({
+      method: "POST",
+      url: "/api/applied",
+      data: job
+    }).then(function() {
       Swal.fire({
-        type: 'success',
-        title: 'Your Job Has Been Saved!',
+        type: "success",
+        title: "Your Job Has Been Saved!",
         showConfirmButton: false,
         timer: 1500
-      })
-      setTimeout(function(){
+      });
+      setTimeout(function() {
         location.reload();
       }, 1500);
     });
-}
+  };
+
+  const appliedHeardBack = id => {
+    $.get(`/api/applied/${id}`, function(data) {
+      console.log(data[0]);
+      var card_id = data[0]._id;
+      var company = data[0].company;
+      var job_title = data[0].job_title;
+      var phone_number = data[0].phone_number;
+      var email = data[0].email;
+      var link = data[0].link;
+      var salary = data[0].salary;
+      var location = data[0].location;
+      var info = data[0].info;
+      var date_created = data[0].date_created;
+      var stamp = moment(date_created).format("lll");
+      var card = {
+        card_id: card_id,
+        company: company,
+        job_title: job_title,
+        phone_number: phone_number,
+        email: email,
+        link: link,
+        salary: salary,
+        location: location,
+        info: info,
+        date_created: stamp
+      };
+      $.ajax({
+        method: "POST",
+        url: "/api/heardback",
+        data: card
+      });
+    });
+    $.ajax({
+      method: "Delete",
+      url: `/api/applied/${id}`
+    });
+  };
+
+  const appliedOffer = id => {
+    $.get(`/api/applied/${id}`, function(data) {
+      console.log(data[0]);
+      var card_id = data[0]._id;
+      var company = data[0].company;
+      var job_title = data[0].job_title;
+      var phone_number = data[0].phone_number;
+      var email = data[0].email;
+      var link = data[0].link;
+      var salary = data[0].salary;
+      var location = data[0].location;
+      var info = data[0].info;
+      var date_created = data[0].date_created;
+      var stamp = moment(date_created).format("lll");
+      var card = {
+        card_id: card_id,
+        company: company,
+        job_title: job_title,
+        phone_number: phone_number,
+        email: email,
+        link: link,
+        salary: salary,
+        location: location,
+        info: info,
+        date_created: stamp
+      };
+      $.ajax({
+        method: "POST",
+        url: "/api/offer",
+        data: card
+      });
+    });
+    $.ajax({
+      method: "Delete",
+      url: `/api/applied/${id}`
+    });
+  };
+
+  const heardBackApplied = id => {
+    $.get(`/api/heardback/${id}`, function(data) {
+      console.log(data[0]);
+      var card_id = data[0]._id;
+      var company = data[0].company;
+      var job_title = data[0].job_title;
+      var phone_number = data[0].phone_number;
+      var email = data[0].email;
+      var link = data[0].link;
+      var salary = data[0].salary;
+      var location = data[0].location;
+      var info = data[0].info;
+      var date_created = data[0].date_created;
+      var stamp = moment(date_created).format("lll");
+      var card = {
+        card_id: card_id,
+        company: company,
+        job_title: job_title,
+        phone_number: phone_number,
+        email: email,
+        link: link,
+        salary: salary,
+        location: location,
+        info: info,
+        date_created: stamp
+      };
+      $.ajax({
+        method: "POST",
+        url: "/api/applied",
+        data: card
+      });
+    });
+    $.ajax({
+      method: "Delete",
+      url: `/api/heardback/${id}`
+    });
+  };
+
+  const heardBackOffer = id => {
+    $.get(`/api/heardback/${id}`, function(data) {
+      console.log(data[0]);
+      var card_id = data[0]._id;
+      var company = data[0].company;
+      var job_title = data[0].job_title;
+      var phone_number = data[0].phone_number;
+      var email = data[0].email;
+      var link = data[0].link;
+      var salary = data[0].salary;
+      var location = data[0].location;
+      var info = data[0].info;
+      var date_created = data[0].date_created;
+      var stamp = moment(date_created).format("lll");
+      var card = {
+        card_id: card_id,
+        company: company,
+        job_title: job_title,
+        phone_number: phone_number,
+        email: email,
+        link: link,
+        salary: salary,
+        location: location,
+        info: info,
+        date_created: stamp
+      };
+      $.ajax({
+        method: "POST",
+        url: "/api/offer",
+        data: card
+      });
+    });
+    $.ajax({
+      method: "Delete",
+      url: `/api/heardback/${id}`
+    });
+  };
+
+  const offerApplied = id => {
+    $.get(`/api/offer/${id}`, function(data) {
+      console.log(data[0]);
+      var card_id = data[0]._id;
+      var company = data[0].company;
+      var job_title = data[0].job_title;
+      var phone_number = data[0].phone_number;
+      var email = data[0].email;
+      var link = data[0].link;
+      var salary = data[0].salary;
+      var location = data[0].location;
+      var info = data[0].info;
+      var date_created = data[0].date_created;
+      var stamp = moment(date_created).format("lll");
+      var card = {
+        card_id: card_id,
+        company: company,
+        job_title: job_title,
+        phone_number: phone_number,
+        email: email,
+        link: link,
+        salary: salary,
+        location: location,
+        info: info,
+        date_created: stamp
+      };
+      $.ajax({
+        method: "POST",
+        url: "/api/applied",
+        data: card
+      });
+    });
+    $.ajax({
+      method: "Delete",
+      url: `/api/offer/${id}`
+    });
+  };
 
 
+  const offerHeardBack = id => {
+    $.get(`/api/offer/${id}`, function(data) {
+      console.log(data[0]);
+      var card_id = data[0]._id;
+      var company = data[0].company;
+      var job_title = data[0].job_title;
+      var phone_number = data[0].phone_number;
+      var email = data[0].email;
+      var link = data[0].link;
+      var salary = data[0].salary;
+      var location = data[0].location;
+      var info = data[0].info;
+      var date_created = data[0].date_created;
+      var stamp = moment(date_created).format("lll");
+      var card = {
+        card_id: card_id,
+        company: company,
+        job_title: job_title,
+        phone_number: phone_number,
+        email: email,
+        link: link,
+        salary: salary,
+        location: location,
+        info: info,
+        date_created: stamp
+      };
+      $.ajax({
+        method: "POST",
+        url: "/api/heardback",
+        data: card
+      });
+    });
+    $.ajax({
+      method: "Delete",
+      url: `/api/offer/${id}`
+    });
+  };
 
-
-
-
-
-
-
-
-//DRAG EVEN SECTION
+  //DRAG EVEN SECTION
   var drake = dragula([
     document.getElementById("applied"),
     document.getElementById("heardBack"),
     document.getElementById("offer")
   ]);
 
-
   drake.on("drop", function(el, target, source, sibling) {
-    if(source.id === 'applied' && target.id === 'heardBack'){
-      console.log(el.id);
-    }else if(source.id === 'applied' && target.id === 'offer'){
-      console.log('you went from APPLIED to OFFER');
-    }else if(source.id === 'offer' && target.id === 'applied'){
-      console.log('you went from OFFER to APPLIED');
-    }else if(source.id === 'offer' && target.id === 'heardBack'){
-      console.log('you went from OFFER to HEARDBACK');
-    }else if(source.id === 'heardBack' && target.id === 'applied'){
-      console.log('you went from HEARDBACK to APPLIED');
-    }else if(source.id === 'heardBack' && target.id === 'offer'){
-      console.log('you went from HEARDBACK to OFFER');
-    }else{
-      console.log('Stayed in the same group!')
+    if (source.id === "applied" && target.id === "heardBack") {
+      appliedHeardBack(el.id);
+    } else if (source.id === "applied" && target.id === "offer") {
+      appliedOffer(el.id);
+    } else if (source.id === "offer" && target.id === "applied") {
+      offerApplied(el.id);
+    } else if (source.id === "offer" && target.id === "heardBack") {
+      offerHeardBack(el.id);
+    } else if (source.id === "heardBack" && target.id === "applied") {
+      heardBackApplied(el.id);
+    } else if (source.id === "heardBack" && target.id === "offer") {
+      heardBackOffer(el.id);
+    } else {
+      console.log("Stayed in the same group!");
     }
   });
 });
