@@ -45,9 +45,40 @@
       <div class="col-2">
       </div>
     </div>
-    <h1>user page</h1>
 
+    <div class="container mt-5">
+        <div class="row text-center">
+  
+          <div class="col-md-6 col-lg-4 mb-3">
+            <div class="card cardFadeIn1">
+              <img src="https://www.fillmurray.com/g/200/200" class="card-img-top" alt="...">
+              <div class="card-body">
+                <h5 class="card-title">Name</h5>
+                <h6 class="card-title">Position</h6>
+                <hr>
+                <p class="card-text">Info</p>
+                <p class="card-text">Info</p>
+                <p class="card-text">Info</p>
+              </div>
+              <!-- <div class="card-footer">
+                <a href="https://rayliraykov.com/" target="_blank" class="btn btn-primary"><i
+                    class="fas fa-globe"></i></a>
+                <a href="https://rayliraykov.com/" target="_blank" class="btn btn-primary"><i
+                    class="fab fa-linkedin-in"></i></a>
+                <a href="https://rayliraykov.com/" target="_blank" class="btn btn-primary"><i
+                    class="fab fa-github"></i></a>
+              </div> -->
+            </div>
+          </div>  
 
+          <div class="col-md-6 col-lg-8 ">
+              <button type="button" class="btn btn-primary btn-lg btn-block showcase-right1">Block level button</button>
+              <button type="button" class="btn btn-primary btn-lg btn-block showcase-right2">Block level button</button>
+              <button type="button" class="btn btn-primary btn-lg btn-block showcase-right3">Block level button</button>
+          </div>
+
+        </div>
+      </div>
 
     <nav class="navbar navbar-light bg-dark">
       <a href="./about.html">About Us</a>
@@ -62,7 +93,7 @@
 
   <script>
     window.sr = ScrollReveal();
-    sr.reveal('.arrow', {
+    sr.reveal('.card', {
       duration: 2000,
       origin: 'bottom'
     });
@@ -71,10 +102,22 @@
       origin: 'top',
       distance: '300px'
     });
-    sr.reveal('.showcase-right', {
+    sr.reveal('.showcase-right1', {
       duration: 2000,
       origin: 'right',
       distance: '300px'
+    });
+    sr.reveal('.showcase-right2', {
+      duration: 2000,
+      origin: 'right',
+      distance: '300px',
+      delay: 500
+    });
+    sr.reveal('.showcase-right3', {
+      duration: 2000,
+      origin: 'right',
+      distance: '300px',
+      delay: 1000
     });
     sr.reveal('.showcase-btn', {
       duration: 2000,
