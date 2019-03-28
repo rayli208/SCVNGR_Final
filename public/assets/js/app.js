@@ -253,7 +253,6 @@ const submitJob = (job) => {
 
   drake.on("drop", function(el, target, source, sibling) {
     if(source.id === 'applied' && target.id === 'heardBack'){
-      console.log('you went from APPLIED to HEARDBACK');
       console.log(el.id);
     }else if(source.id === 'applied' && target.id === 'offer'){
       console.log('you went from APPLIED to OFFER');
