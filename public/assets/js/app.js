@@ -1,7 +1,4 @@
 //DISPLAY EITHER MOBILE OR DESKTOP DEPENDING ON SCREEN SIZE
-
-var above920 = false;
-
 function checkSize() {
   if ($(window).width() > 920) {
     $("#desktop-container").show();
@@ -11,21 +8,18 @@ function checkSize() {
     $("#mobile-container").show();
   }
 }
-
-function refresh(){
-  if (($(window).width() <= 920) && above920) {
-    location.reload(true);
-  }
-  above920 = $(window).width() > 920;
-}
 checkSize();
 
 $(document).ready(function() {
-  above920 = $(window).width() > 920;
   //ON SCREEN SIZE CHECK TO SEE IF MOBILE OR DESKTOP
+  var width = $(window).width();
   $(window).resize(function() {
     checkSize();
-    refresh();
+    if (width > 920 && $(window).width() < 920) {
+      location.reload();
+    } else if (width < 920 && $(window).width() > 920) {
+      location.reload();
+    }
   });
 
   //LOADING UP ALL JOBS
@@ -218,7 +212,6 @@ $(document).ready(function() {
 
           heardBack.innerHTML = heardBack.innerHTML += card;
           heardMobile.innerHTML = heardMobile.innerHTML += mini_card;
-
         }
       }
     });
@@ -315,7 +308,6 @@ $(document).ready(function() {
 
           offer.innerHTML = offer.innerHTML += card;
           offerMobile.innerHTML = offerMobile.innerHTML += mini_card;
-
         }
       }
     });
@@ -381,30 +373,34 @@ $(document).ready(function() {
     }
   });
 
-
-
-  $(document).on("click", ".fa-arrow-right", function () {
+  $(document).on("click", ".fa-arrow-right", function() {
     const arrow = $(this)[0];
-    const containerID = $(this).parent().parent().parent().parent().children().eq(1)[0].id;
-    const card = $(this).parent().parent()[0];
-    const jobID = $(this).parent().parent()[0].id;
+    const containerID = $(this)
+      .parent()
+      .parent()
+      .parent()
+      .parent()
+      .children()
+      .eq(1)[0].id;
+    const card = $(this)
+      .parent()
+      .parent()[0];
+    const jobID = $(this)
+      .parent()
+      .parent()[0].id;
 
-    if(containerID === 'collapseOne'){
+    if (containerID === "collapseOne") {
       appliedHeardBack(jobID);
-      $('#collapseTwo').append(card);
-      $('#collapseOne').remove(card);
-    }else if(containerID === 'collapseTwo'){
+      $("#collapseTwo").append(card);
+      $("#collapseOne").remove(card);
+    } else if (containerID === "collapseTwo") {
       arrow.remove();
       heardBackOffer(jobID);
-      $('#collapseThree').append(card);   
-      $('#collapseTwo').remove(card);
-
-    }else{
-      console.log("There has been an error..")
+      $("#collapseThree").append(card);
+      $("#collapseTwo").remove(card);
+    } else {
+      console.log("There has been an error..");
     }
-
-
-
 
     // Swal.fire({
     //   title: 'Are you sure?',
@@ -434,6 +430,5 @@ $(document).ready(function() {
     //       .catch(err => console.log(err));
     //   }
     // })
-  })
-
+  });
 });
