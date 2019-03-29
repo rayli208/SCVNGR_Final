@@ -390,6 +390,24 @@ $(document).ready(function() {
       .parent()[0].id;
 
     if (containerID === "collapseOne") {
+      Swal.fire({
+        title: "Are you wanna move this to the next stage?",
+        text: "You won't be able to revert this!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#2e003e",
+        cancelButtonColor: "#c49991",
+        confirmButtonText: "Yes, delete it!"
+      }).then(result => {
+        if (result.value) {
+          Swal.fire({
+            title: "Congratulations",
+            text: "Keep on hustling!",
+            type: "success",
+            confirmButtonColor: "#2e003e"
+          });
+        }
+      });
       appliedHeardBack(jobID);
       $("#collapseTwo").append(card);
       $("#collapseOne").remove(card);
@@ -401,34 +419,5 @@ $(document).ready(function() {
     } else {
       console.log("There has been an error..");
     }
-
-    // Swal.fire({
-    //   title: 'Are you sure?',
-    //   text: "You won't be able to revert this!",
-    //   type: 'warning',
-    //   showCancelButton: true,
-    //   confirmButtonColor: '#0F3459',
-    //   cancelButtonColor: '#C1292E',
-    //   confirmButtonText: 'Yes, delete it!'
-    // }).then((result) => {
-    //   if (result.value) {
-    //     Swal.fire({
-    //       type: 'error',
-    //       showConfirmButton: false,
-    //       title: 'Dream Has Been Deleted!',
-    //       text: "Keep on dreaming!!"},
-    //     )
-    //     $.ajax({
-    //         url: `/api/dreams/${dreamId}`,
-    //         method: "DELETE"
-    //       }).then(function (deleteDream) {
-    //         console.log(deleteDream);
-    //         setTimeout(function () {
-    //           location.reload();
-    //         }, 1500);
-    //       })
-    //       .catch(err => console.log(err));
-    //   }
-    // })
   });
 });
