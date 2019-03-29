@@ -1,6 +1,9 @@
 //DISPLAY EITHER MOBILE OR DESKTOP DEPENDING ON SCREEN SIZE
+
+var above920 = false;
+
 function checkSize() {
-  if ($(window).width() >= 920) {
+  if ($(window).width() > 920) {
     $("#desktop-container").show();
     $("#mobile-container").hide();
   } else {
@@ -8,12 +11,21 @@ function checkSize() {
     $("#mobile-container").show();
   }
 }
+
+function refresh(){
+  if (($(window).width() <= 920) && above920) {
+    location.reload(true);
+  }
+  above920 = $(window).width() > 920;
+}
 checkSize();
 
 $(document).ready(function() {
+  above920 = $(window).width() > 920;
   //ON SCREEN SIZE CHECK TO SEE IF MOBILE OR DESKTOP
   $(window).resize(function() {
     checkSize();
+    refresh();
   });
 
   //LOADING UP ALL JOBS
@@ -21,7 +33,7 @@ $(document).ready(function() {
     $.get(`/api/applied/`, function(data) {
       if (data.length !== 0) {
         var applied = document.getElementById("applied");
-        var appliedMobile = document.getElementById("collapseMobileOne");
+        var appliedMobile = document.getElementById("collapseOne");
         for (var i = data.length - 1; i + 1 > data.length - data.length; i--) {
           var card_id = data[i]._id;
           var company = data[i].company;
@@ -296,7 +308,6 @@ $(document).ready(function() {
       <div class="card-footer">
       <span class="text-muted"> Applied:  ${stamp} </span>
         <i class="fas fa-trash-alt trash"></i>
-        <i class="fas fa-arrow-right"></i>
         <i class="fas fa-edit edit"></i>
       </div>
     </div>
@@ -322,13 +333,12 @@ $(document).ready(function() {
       link: $("#link").val(),
       location: $("#location").val(),
       salary: $("#salary").val(),
-      info: JSON.stringify($("#info").html())
+      info: $("#text-area").val()
     };
     submitJob(newJob);
   });
 
   const submitJob = job => {
-    console.log(job);
     $.ajax({
       method: "POST",
       url: "/api/applied",
@@ -370,4 +380,60 @@ $(document).ready(function() {
       console.log("Stayed in the same group!");
     }
   });
+
+
+
+  $(document).on("click", ".fa-arrow-right", function () {
+    const arrow = $(this)[0];
+    const containerID = $(this).parent().parent().parent().parent().children().eq(1)[0].id;
+    const card = $(this).parent().parent()[0];
+    const jobID = $(this).parent().parent()[0].id;
+
+    if(containerID === 'collapseOne'){
+      appliedHeardBack(jobID);
+      $('#collapseTwo').append(card);
+      $('#collapseOne').remove(card);
+    }else if(containerID === 'collapseTwo'){
+      arrow.remove();
+      heardBackOffer(jobID);
+      $('#collapseThree').append(card);   
+      $('#collapseTwo').remove(card);
+
+    }else{
+      console.log("There has been an error..")
+    }
+
+
+
+
+    // Swal.fire({
+    //   title: 'Are you sure?',
+    //   text: "You won't be able to revert this!",
+    //   type: 'warning',
+    //   showCancelButton: true,
+    //   confirmButtonColor: '#0F3459',
+    //   cancelButtonColor: '#C1292E',
+    //   confirmButtonText: 'Yes, delete it!'
+    // }).then((result) => {
+    //   if (result.value) {
+    //     Swal.fire({
+    //       type: 'error',
+    //       showConfirmButton: false,
+    //       title: 'Dream Has Been Deleted!',
+    //       text: "Keep on dreaming!!"},
+    //     )
+    //     $.ajax({
+    //         url: `/api/dreams/${dreamId}`,
+    //         method: "DELETE"
+    //       }).then(function (deleteDream) {
+    //         console.log(deleteDream);
+    //         setTimeout(function () {
+    //           location.reload();
+    //         }, 1500);
+    //       })
+    //       .catch(err => console.log(err));
+    //   }
+    // })
+  })
+
 });
