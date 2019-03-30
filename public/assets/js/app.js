@@ -400,6 +400,9 @@ $(document).ready(function() {
         confirmButtonText: "Yes, delete it!"
       }).then(result => {
         if (result.value) {
+          appliedHeardBack(jobID);
+          $("#collapseTwo").append(card);
+          $("#collapseOne").remove(card);
           Swal.fire({
             title: "Congratulations",
             text: "Keep on hustling!",
@@ -408,14 +411,29 @@ $(document).ready(function() {
           });
         }
       });
-      appliedHeardBack(jobID);
-      $("#collapseTwo").append(card);
-      $("#collapseOne").remove(card);
     } else if (containerID === "collapseTwo") {
-      arrow.remove();
-      heardBackOffer(jobID);
-      $("#collapseThree").append(card);
-      $("#collapseTwo").remove(card);
+      Swal.fire({
+        title: "Are you wanna move this to the next stage?",
+        text: "You won't be able to revert this!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#2e003e",
+        cancelButtonColor: "#c49991",
+        confirmButtonText: "Yes, delete it!"
+      }).then(result => {
+        if (result.value) {
+          arrow.remove();
+          heardBackOffer(jobID);
+          $("#collapseThree").append(card);
+          $("#collapseTwo").remove(card);
+          Swal.fire({
+            title: "Congratulations",
+            text: "Keep on hustling!",
+            type: "success",
+            confirmButtonColor: "#2e003e"
+          });
+        }
+      });
     } else {
       console.log("There has been an error..");
     }
