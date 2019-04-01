@@ -1,6 +1,6 @@
 //DISPLAY EITHER MOBILE OR DESKTOP DEPENDING ON SCREEN SIZE
 function checkSize() {
-  if ($(window).width() >= 920) {
+  if ($(window).width() > 920) {
     $("#desktop-container").show();
     $("#mobile-container").hide();
   } else {
@@ -12,8 +12,14 @@ checkSize();
 
 $(document).ready(function() {
   //ON SCREEN SIZE CHECK TO SEE IF MOBILE OR DESKTOP
+  var width = $(window).width();
   $(window).resize(function() {
     checkSize();
+    if (width > 920 && $(window).width() < 920) {
+      location.reload();
+    } else if (width < 920 && $(window).width() > 920) {
+      location.reload();
+    }
   });
 
   //LOADING UP ALL JOBS
@@ -206,7 +212,6 @@ $(document).ready(function() {
 
           heardBack.innerHTML = heardBack.innerHTML += card;
           heardMobile.innerHTML = heardMobile.innerHTML += mini_card;
-
         }
       }
     });
@@ -296,7 +301,6 @@ $(document).ready(function() {
       <div class="card-footer">
       <span class="text-muted"> Applied:  ${stamp} </span>
         <i class="fas fa-trash-alt trash"></i>
-        <i class="fas fa-arrow-right"></i>
         <i class="fas fa-edit edit"></i>
       </div>
     </div>
@@ -304,7 +308,6 @@ $(document).ready(function() {
 
           offer.innerHTML = offer.innerHTML += card;
           offerMobile.innerHTML = offerMobile.innerHTML += mini_card;
-
         }
       }
     });
@@ -322,13 +325,12 @@ $(document).ready(function() {
       link: $("#link").val(),
       location: $("#location").val(),
       salary: $("#salary").val(),
-      info: JSON.stringify($("#info").html())
+      info: $("#text-area").val()
     };
     submitJob(newJob);
   });
 
   const submitJob = job => {
-    console.log(job);
     $.ajax({
       method: "POST",
       url: "/api/applied",
@@ -395,3 +397,69 @@ $(document).ready(function() {
     })
   }
 });
+  $(document).on("click", ".fa-arrow-right", function() {
+    const arrow = $(this)[0];
+    const containerID = $(this)
+      .parent()
+      .parent()
+      .parent()
+      .parent()
+      .children()
+      .eq(1)[0].id;
+    const card = $(this)
+      .parent()
+      .parent()[0];
+    const jobID = $(this)
+      .parent()
+      .parent()[0].id;
+
+    if (containerID === "collapseOne") {
+      Swal.fire({
+        title: "Are you wanna move this to the next stage?",
+        text: "You won't be able to revert this!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#2e003e",
+        cancelButtonColor: "#c49991",
+        confirmButtonText: "Yes, delete it!"
+      }).then(result => {
+        if (result.value) {
+          appliedHeardBack(jobID);
+          $("#collapseTwo").append(card);
+          $("#collapseOne").remove(card);
+          Swal.fire({
+            title: "Congratulations",
+            text: "Keep on hustling!",
+            type: "success",
+            confirmButtonColor: "#2e003e"
+          });
+        }
+      });
+    } else if (containerID === "collapseTwo") {
+      Swal.fire({
+        title: "Are you wanna move this to the next stage?",
+        text: "You won't be able to revert this!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#2e003e",
+        cancelButtonColor: "#c49991",
+        confirmButtonText: "Yes, delete it!"
+      }).then(result => {
+        if (result.value) {
+          arrow.remove();
+          heardBackOffer(jobID);
+          $("#collapseThree").append(card);
+          $("#collapseTwo").remove(card);
+          Swal.fire({
+            title: "Congratulations",
+            text: "Keep on hustling!",
+            type: "success",
+            confirmButtonColor: "#2e003e"
+          });
+        }
+      });
+    } else {
+      console.log("There has been an error..");
+    }
+  });
+
