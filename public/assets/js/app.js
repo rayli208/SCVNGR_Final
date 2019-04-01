@@ -18,21 +18,21 @@ $(document).ready(function() {
 
   //LOADING UP ALL JOBS
   const loadAllJobs = () => {
-    $.get(`/api/applied/`, function(data) {
-      if (data.length !== 0) {
+    $.get(`/api/user/getjobs`, function(data) {
+      if (data[0].applied.length !== 0) {
         var applied = document.getElementById("applied");
         var appliedMobile = document.getElementById("collapseMobileOne");
-        for (var i = data.length - 1; i + 1 > data.length - data.length; i--) {
-          var card_id = data[i]._id;
-          var company = data[i].company;
-          var job_title = data[i].job_title;
-          var phone_number = data[i].phone_number;
-          var email = data[i].email;
-          var link = data[i].link;
-          var salary = data[i].salary;
-          var location = data[i].location;
-          var info = data[i].info;
-          var date_created = data[i].date_created;
+        for (var i = data[0].applied.length - 1; i + 1 > data[0].applied.length - data[0].applied.length; i--) {
+          var card_id = data[0].applied[i]._id;
+          var company = data[0].applied[i].company;
+          var job_title = data[0].applied[i].job_title;
+          var phone_number = data[0].applied[i].phone_number;
+          var email = data[0].applied[i].email;
+          var link = data[0].applied[i].link;
+          var salary = data[0].applied[i].salary;
+          var location = data[0].applied[i].location;
+          var info = data[0].applied[i].info;
+          var date_created = data[0].applied[i].date_created;
           var stamp = moment(date_created).format("lll");
 
           var card = `
@@ -114,21 +114,21 @@ $(document).ready(function() {
       }
     });
 
-    $.get(`/api/heardback/`, function(data) {
+    $.get(`/api/user/getjobs`, function(data) {
       if (data.length !== 0) {
         var heardBack = document.getElementById("heardBack");
         var heardMobile = document.getElementById("collapseTwo");
-        for (var i = data.length - 1; i + 1 > data.length - data.length; i--) {
-          var card_id = data[i]._id;
-          var company = data[i].company;
-          var job_title = data[i].job_title;
-          var phone_number = data[i].phone_number;
-          var email = data[i].email;
-          var link = data[i].link;
-          var salary = data[i].salary;
-          var location = data[i].location;
-          var info = data[i].info;
-          var date_created = data[i].date_created;
+        for (var i = data[0].heardback.length - 1; i + 1 > data[0].heardback.length - data[0].heardback.length; i--) {
+          var card_id = data[0].heardback[i]._id;
+          var company = data[0].heardback[i].company;
+          var job_title = data[0].heardback[i].job_title;
+          var phone_number = data[0].heardback[i].phone_number;
+          var email = data[0].heardback[i].email;
+          var link = data[0].heardback[i].link;
+          var salary = data[0].heardback[i].salary;
+          var location = data[0].heardback[i].location;
+          var info = data[0].heardback[i].info;
+          var date_created = data[0].heardback[i].date_created;
           var stamp = moment(date_created).format("lll");
 
           var card = `
@@ -370,4 +370,28 @@ $(document).ready(function() {
       console.log("Stayed in the same group!");
     }
   });
+
+  // On click event to remove job
+  $(document).on('click', '.fa-trash-alt', function() {
+
+    cardId = $(this).parents('.card')[0].id
+    cardLocation = $(this).parents()[2].id
+
+    console.log(cardId);
+    console.log(cardLocation);
+    
+    deleteJob(cardId, cardLocation)
+  })
+
+  // Delete job function
+  const deleteJob = (id, location) => {
+
+    $.ajax({
+      url: `/api/${location}/${id}`,
+      method: 'DELETE'
+    }).then(response => {
+      console.log(response);
+      window.location.reload();
+    })
+  }
 });

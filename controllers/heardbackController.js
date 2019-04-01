@@ -9,8 +9,11 @@ module.exports = {
   },
 
   createJob: function(req, res) {
+    console.log(req.body);
     db.HeardBack.create(req.body)
-      .then(HeardBackDB => res.json(HeardBackDB))
+      .then(HeardBackDB => (
+        db.User.findOneAndUpdate({ _id: req.user._id}, { $push: { heardback: HeardBackDB._id } }, { new: true })
+      ))
       .catch(err => console.log(err))
   },
 

@@ -10,7 +10,9 @@ module.exports = {
 
   createJob: function(req, res) {
     db.Offer.create(req.body)
-      .then(OfferDB => res.json(OfferDB))
+      .then(OfferDB => (
+        db.User.findOneAndUpdate({ _id: req.user._id}, { $push: { offer: OfferDB._id } }, { new: true })
+      ))
       .catch(err => console.log(err))
   },
 

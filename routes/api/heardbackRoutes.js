@@ -16,4 +16,3 @@ router
     .delete(heardbackController.deleteJob);
 
 module.exports = router;
-  

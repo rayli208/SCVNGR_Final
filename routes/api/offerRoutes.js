@@ -16,4 +16,3 @@ router
     .delete(offerController.deleteJob);
 
 module.exports = router;
-  
