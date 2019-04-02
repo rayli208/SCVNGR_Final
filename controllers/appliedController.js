@@ -66,31 +66,23 @@ module.exports = {
     db.Applied.find({ _id: req.params.id })
       .then(resultDB => {
         console.log(resultDB)
-        db.User.findOneAndUpdate({ _id: req.user._id }, { $pull: { applied: { _id: req.params.id }, $push: { heardback: resultDB[0]._id } } }, { new: true, $multi: true }, function(err, result) {
+        db.User.findOneAndUpdate({ _id: req.user._id }, { $pull: { applied: { _id: req.params.id } , $push: { heardback: resultDB[0]._id } } }, { new: true, $multi: true }, function(err, result) {
           if (err) {
             console.log(err); 
           }
           res.json(result);
         })
       })
-      .then(resultDB => {
-        console.log(resultDB)
-        db.User.updateOne({ _id: req.user._id }, { $pull: { applied: { _id: resultDB[0]._id } } }, function(err, result) {
-          if(err) {
-            console.log(err);
-          }
-          res.json(result)
-        })
-      } )
       .catch(err => console.log(err))
   },
 
   appliedToOffer: function(req, res) {
     db.Applied.find({ _id: req.params.id })
-      .then(AppliedDB => {
-        db.User.update({ _id: req.user._id }, { $push: { offer: AppliedDB[0]._id }, $pull: { applied: AppliedDB[0]._id } }, { new: true, $multi: true }, function(err, result) {
+      .then(resultDB => {
+        console.log(resultDB)
+        db.User.findOneAndUpdate({ _id: req.user._id }, { $pull: { applied: { _id: req.params.id }, $push: { offer: resultDB[0]._id } } }, { new: true, $multi: true }, function(err, result) {
           if (err) {
-            console.log(err);
+            console.log(err); 
           }
           res.json(result);
         })
