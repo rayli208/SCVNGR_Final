@@ -13,7 +13,14 @@ router
   .route('/:id')
     .put(appliedController.updateJob)
     .get(appliedController.findJob)
-    .delete(appliedController.deleteJob);
+    .delete(appliedController.deleteJob)
+
+router
+  .route('/heardback/:id')
+    .post(appliedController.appliedToHeardback);
+
+router
+  .route('/offer/:id')
+    .post(appliedController.appliedToOffer);
 
 module.exports = router;
-  

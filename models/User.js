@@ -20,23 +20,29 @@ const UserSchema = new Schema ({
     type: Date,
     default: Date.now
   },
-  applied: {
-    type: Schema.Types.ObjectId,
-    ref: "Applied"
-  },
-  heardback: {
-    type: Schema.Types.ObjectId,
-    ref: "HeardBack"
-  },
-  offer: {
-    type: Schema.Types.ObjectId,
-    ref: "Offer"
-  }
+  applied: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Applied"
+    }
+  ],
+  heardback: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "HeardBack"
+    }
+  ],
+  offer: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Offer"
+    }
+  ]
 
 });
 
+// Use passport-local-mongoose to hash user password
 UserSchema.plugin(passportLocalMongoose);
-
 
 // Create user model from the schema
 const User = mongoose.model("User", UserSchema);
