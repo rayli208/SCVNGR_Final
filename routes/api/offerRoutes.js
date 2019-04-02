@@ -6,10 +6,6 @@ router
   .post(offerController.createJob);
 
 router
-  .route('/')
-  .get(offerController.getAllJobs);
-
-router
   .route('/:id')
   .put(offerController.updateJob)
   .get(offerController.findJob)

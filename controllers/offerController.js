@@ -2,12 +2,6 @@ const db = require('../models');
 
 module.exports = {
 
-  getAllJobs: function(req, res) {
-    db.Offer.find({})
-      .then(OfferDB => res.json(OfferDB))
-      .catch(err => console.log(err))
-  },
-
   createJob: function(req, res) {
     db.Offer.create(req.body)
       .then(OfferDB => (

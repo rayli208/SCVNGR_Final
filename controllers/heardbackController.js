@@ -2,12 +2,6 @@ const db = require('../models');
 
 module.exports = {
 
-  getAllJobs: function(req, res) {
-    db.HeardBack.find({})
-      .then(HeardBackDB => res.json(HeardBackDB))
-      .catch(err => console.log(err))
-  },
-
   createJob: function(req, res) {
     console.log(req.body);
     db.HeardBack.create(req.body)
