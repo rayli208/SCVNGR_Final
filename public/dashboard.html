@@ -16,30 +16,30 @@
 <body>
 
   <div>
-    <div class="row text-center row-black">
-      <div class="col-2">
-      </div>
-      <div class="col-2">
-        <a href="./dashboard.html">
-          <i class="fas fa-home nav-icon"></i>
-        </a>
-      </div>
-      <div class="col-2">
-        <a href="./user.html">
-          <i class="fas fa-user-alt nav-icon"></i>
-        </a>
-      </div>
-      <div class="col-2">
-        <a href="./chart.html">
-          <i class="fas fa-chart-bar nav-icon"></i>
-        </a>
-      </div>
-      <div class="col-2">
-        <a href="./index.html">
-          <i class="fas fa-sign-out-alt nav-icon"></i>
-        </a>
-      </div>
-      <div class="col-2">
+    <div class="container-fluid">
+      <div class="row text-center row-black">
+        <div class="col-2">
+        </div>
+        <div class="col-2">
+          <a href="./dashboard.html">
+            <i class="fas fa-home nav-icon"></i>
+          </a>
+        </div>
+        <div class="col-2">
+          <a href="./chart.html">
+            <i class="fas fa-chart-bar nav-icon"></i>
+          </a>
+        </div>
+        <div class="col-2">
+          <a href="./about.html">
+            <i class="fas fa-users nav-icon"></i>
+          </a>
+        </div>
+        <div class="col-2">
+          <a href="./index.html">
+            <i class="fas fa-sign-out-alt nav-icon"></i>
+          </a>
+        </div>
       </div>
     </div>
 
@@ -68,17 +68,13 @@
           <div class="card-header appliedMobile" id="headingOne">
             <h5 class="mb-0">
               <button class="btn button-mobile button-mobile-applied" type="button" data-toggle="collapse"
-                data-target="#collapseMobileOne" aria-expanded="true" aria-controls="collapseMobileOne">
+                data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
                 Applied
               </button>
             </h5>
           </div>
 
-          <div id="collapseMobileOne" class="collapse show" aria-labelledby="headingOne"
-            data-parent="#accordionExample">
-            <div class="card-body heardBackMobile text-center">
-              Test 1
-            </div>
+          <div id="collapseOne" class="collapse show" aria-labelledby="headingOne" data-parent="#accordionExample">
           </div>
         </div>
         <div class="card">
@@ -91,9 +87,6 @@
             </h5>
           </div>
           <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionExample">
-            <div class="card-body heardBackMobile text-center">
-              Test 2
-            </div>
           </div>
         </div>
         <div class="card">
@@ -106,9 +99,6 @@
             </h5>
           </div>
           <div id="collapseThree" class="collapse" aria-labelledby="headingThree" data-parent="#accordionExample">
-            <div class="card-body offerMobile text-center">
-              Test 3
-            </div>
           </div>
         </div>
       </div>
@@ -118,7 +108,7 @@
 
 
     <!--GIANT CONTAINER-->
-    <div id="desktop-container">
+    <div class="container-fluid" id="desktop-container">
       <!--LABELS-->
       <div class="row">
         <div class="col-4 bg-dpurp white">
@@ -150,11 +140,6 @@
         </div>
       </div>
     </div>
-
-
-    <nav class="navbar navbar-light bg-dark">
-      <a href="./about.html">About Us</a>
-    </nav>
 
     <!--MODALS-->
     <!-- SETTING UP CARD MODAL-->
@@ -205,8 +190,7 @@
               </div>
               <div class="form-group">
                 <label for="text-area">Additional Info..</label>
-                <textarea class="form-control" id="info"
-                  placeholder="ex. Remember to follow up in a week!"></textarea>
+                <textarea class="form-control" id="info" placeholder="ex. Remember to follow up in a week!"></textarea>
               </div>
             </form>
           </div>
