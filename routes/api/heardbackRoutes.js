@@ -6,10 +6,6 @@ router
   .post(heardbackController.createJob);
 
 router
-  .route('/')
-  .get(heardbackController.getAllJobs);
-
-router
   .route('/:id')
   .put(heardbackController.updateJob)
   .get(heardbackController.findJob)
