@@ -1,7 +1,7 @@
 $(document).ready(function () {
 
   // Register event
-  $('#register-btn').on('click', function(event) {
+  $('#register-btn').on('click', function (event) {
     event.preventDefault();
 
     const newUser = {
@@ -18,34 +18,51 @@ $(document).ready(function () {
     const errorMsg = [];
 
     if (checkPass != password2) {
-      errorMsg.push(`<li>Passwords do not match.</li>`);
+      errorMsg.push('Passwords do not match.');
     };
 
     if (checkPass.length < 8) {
-      errorMsg.push(`<li>Password needs to be at least 8 characters.</li>`);
+      errorMsg.push('Password needs to be at least 8 characters.');
     };
 
     const lowerCaseLetters = /[a-z]/g;
     if (!lowerCaseLetters.test(checkPass)) {
-      errorMsg.push(`<li>Password must contain at least one lowercase letter.</li>`);
+      errorMsg.push('Password must contain at least one lowercase letter.');
     };
 
     const upperCaseLetters = /[A-Z]/g;
     if (!upperCaseLetters.test(checkPass)) {
-      errorMsg.push(`<li>Password must contain at least one uppercase letter.</li>`);
+      errorMsg.push('Password must contain at least one uppercase letter.');
     };
 
     const numbers = /[0-9]/g;
     if (!numbers.test(checkPass)) {
-      errorMsg.push(`<li>Password must contain at least one number.</li>`);
+      errorMsg.push('Password must contain at least one number.');
     };
 
     if (errorMsg.length > 0) {
-      const errString = errorMsg.join("\n")
-      $("#password-register").popover({ 'html': true });
-      $("#password-register").attr("data-content", errString);
-      $('[data-toggle=popover2]').popover('show');
+      for (let i = 0; i < errorMsg.length; i++) {
+        let alertError = `<div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <p>${errorMsg[i]}</p>
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>`
+
+        $('#alertErrors').append(alertError);
+      };
+
+
+
+      // const errString = errorMsg.join("\n")
+      // $("#password-register").popover({ 'html': true });
+      // $("#password-register").attr("data-content", errString);
+      // $('[data-toggle=popover2]').popover('show');
       return false;
+
+      // <div class="alert alert-warning" role="alert">
+      //  <p></p>
+      // </div>
 
     } else {
 
