@@ -110,7 +110,7 @@ $(document).ready(function () {
       <span class="text-muted"> Applied:  ${stamp} </span>
         <i class="fas fa-trash-alt trash"></i>
         <i class="fas fa-arrow-right"></i>
-        <i class="fas fa-edit edit"></i>
+        <i class="fas fa-edit edit" data-toggle="modal" data-target="#editInfoModal"></i>
       </div>
     </div>
             `;
@@ -206,7 +206,7 @@ $(document).ready(function () {
       <span class="text-muted"> Applied:  ${stamp} </span>
         <i class="fas fa-trash-alt trash"></i>
         <i class="fas fa-arrow-right"></i>
-        <i class="fas fa-edit edit"></i>
+        <i class="fas fa-edit edit" data-toggle="modal" data-target="#editInfoModal"></i>
       </div>
     </div>
             `;
@@ -302,7 +302,7 @@ $(document).ready(function () {
       <div class="card-footer">
       <span class="text-muted"> Applied:  ${stamp} </span>
         <i class="fas fa-trash-alt trash"></i>
-        <i class="fas fa-edit edit"></i>
+        <i class="fas fa-edit edit" data-toggle="modal" data-target="#editInfoModal"></i>
       </div>
     </div>
             `;
@@ -336,8 +336,7 @@ $(document).ready(function () {
       method: "POST",
       url: "/api/applied",
       data: job
-    }).then(function (res) {
-      console.log(res);
+    }).then(function () {
       Swal.fire({
         type: "success",
         title: "Your Job Has Been Saved!",

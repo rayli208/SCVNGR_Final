@@ -44,7 +44,7 @@ $(document).ready(function () {
       const errString = errorMsg.join("\n")
       $("#password-register").popover({ 'html': true });
       $("#password-register").attr("data-content", errString);
-      $('[data-toggle=popover]').popover('show');
+      $('[data-toggle=popover2]').popover('show');
       return false;
 
     } else {
