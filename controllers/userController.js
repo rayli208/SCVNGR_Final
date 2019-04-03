@@ -9,6 +9,16 @@ module.exports = {
       .catch(err => console.log(err));
   },
 
+  getUserJobs: function(req, res) {
+    db.User.find({_id: req.user.id})
+      .populate('applied heardback offer')
+      .then(UserJobs => {
+        res.json(UserJobs)
+        console.log(UserJobs)
+      })
+      .catch(err => console.log(err))
+  },
+
   login: function(req, res) {
     console.log(req.user);
     res.json('/dashboard')

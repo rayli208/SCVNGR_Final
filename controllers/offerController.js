@@ -2,14 +2,11 @@ const db = require('../models');
 
 module.exports = {
 
-  getAllJobs: function(req, res) {
-    db.Offer.find({})
-      .then(OfferDB => res.json(OfferDB))
-      .catch(err => console.log(err))
-  },
-
   createJob: function(req, res) {
     db.Offer.create(req.body)
+      .then(OfferDB => (
+        db.User.findOneAndUpdate({ _id: req.user._id}, { $push: { offer: OfferDB._id } }, { new: true })
+      ))
       .then(OfferDB => res.json(OfferDB))
       .catch(err => console.log(err))
   },
@@ -21,34 +18,7 @@ module.exports = {
   },
 
   updateJob: function(req, res) {
-    const updateJobInfo = {};
-
-    if(req.body.job_title) {
-      updateJobInfo.job_title = req.body.job_title
-    }
-    if(req.body.phone_number) {
-      updateJobInfo.phone_number = req.body.phone_number
-    }
-    if(req.body.email) {
-      updateJobInfo.email = req.body.email
-    }
-    if(req.body.location) {
-      updateJobInfo.location = req.body.location
-    }
-    if(req.body.salary) {
-      updateJobInfo.salary = req.body.salary
-    }
-    if(req.body.link) {
-      updateJobInfo.link = req.body.link
-    }
-    if(req.body.info) {
-      updateJobInfo.info = req.body.info
-    }
-    if(req.body.positionId) {
-        updateJobInfo.positionId = req.body.positionId
-    }
-
-    db.Offer.findOneAndUpdate({_id: req.params.id}, {$set: updatedJobInfo}, {new:true})
+    db.Offer.findOneAndUpdate({_id: req.params.id}, {$set: req.body}, {new:true})
       .then(OfferDB => console.log(OfferDB))
       .catch(err => console.log(err))
       .finally(res.end());
@@ -57,6 +27,34 @@ module.exports = {
   findJob: function(req, res) {
     db.Offer.find({ _id: req.params.id })
       .then(OfferDB => res.json(OfferDB))
+      .catch(err => console.log(err))
+  },
+
+  offerToHeardback: function(req, res) {
+    db.Offer.find({ _id: req.params.id })
+      .then(resultDB => {
+        console.log(resultDB)
+        db.User.findOneAndUpdate({ _id: req.user._id }, { $pull: { offer: { _id: req.params.id }, $push: { heardback: resultDB[0]._id } } }, { new: true, $multi: true }, function(err, result) {
+          if (err) {
+            console.log(err); 
+          }
+          res.json(result);
+        })
+      })
+      .catch(err => console.log(err))
+  },
+
+  offerToApplied: function(req, res) {
+    db.Offer.find({ _id: req.params.id })
+      .then(resultDB => {
+        console.log(resultDB)
+        db.User.findOneAndUpdate({ _id: req.user._id }, { $pull: { offer: { _id: req.params.id }, $push: { applied: resultDB[0]._id } } }, { new: true, $multi: true }, function(err, result) {
+          if (err) {
+            console.log(err); 
+          }
+          res.json(result);
+        })
+      })
       .catch(err => console.log(err))
   },
 

@@ -42,6 +42,7 @@
                 <div class="modal-body">
                   <form>
                     <div class="row">
+                        <div id="alertErrors" class="text-center mx-auto"></div>
                       <div class=" form-group col">
                         <input type="text" class="form-control" placeholder="First Name" id="first-name">
                       </div>
@@ -54,11 +55,17 @@
                         placeholder="Email">
                     </div>
                     <div class="form-group">
-                      <input type="password" class="form-control" id="password-register" placeholder="Password">
+                      <input type="password" class="form-control" id="password-register" placeholder="Password" data-toggle="popover2" data-placement="right" data-content="">
                     </div>
                     <div class="form-group">
                       <input type="password" class="form-control" id="password-confirm" placeholder="Password">
                     </div>
+                    <small>
+                      Password must be between 8-16 characters and contain at least one of the following: <br />
+                      An uppercase character <br />
+                      A lowercase character <br />
+                      A number
+                    </small>
                   </form>
                 </div>
                 <div class="modal-footer">
@@ -122,7 +129,7 @@
           <h2 class="pb-4 displayText">Add structure to your job search by tracking all of your jobs in one place!</h2>
         </div>
         <div class="col-12 col-md-6 info-left">
-          <video width="100% src="" controls></video>
+          <video width="100%" src="./assets/images/Screen Recording 2019-04-03 at 6.25.40 PM.mov" controls></video>
         </div>
         <div class=" col-12 col-md-6 info-right">
             <h5>Never lose track of the jobs you applied to.</h5>
@@ -143,7 +150,7 @@
             status. Simply click and drag the job to the new section it belongs in.</p>
         </div>
         <div class="col-12 col-md-6 info-right2">
-          <video width="100% src="" controls></video>
+          <video width="100%" src="./assets/images/Screen Recording 2019-04-03 at 6.30.23 PM.mov" controls></video>
           </div>
       </div>
 

@@ -10,10 +10,10 @@ function checkSize() {
 }
 checkSize();
 
-$(document).ready(function() {
+$(document).ready(function () {
   //ON SCREEN SIZE CHECK TO SEE IF MOBILE OR DESKTOP
   var width = $(window).width();
-  $(window).resize(function() {
+  $(window).resize(function () {
     checkSize();
     if (width > 920 && $(window).width() < 920) {
       location.reload();
@@ -22,28 +22,47 @@ $(document).ready(function() {
     }
   });
 
+  //LOADING UP ALL JOBS
+  const loadAllJobs = () => {
+    $.get(`/api/user/getjobs`, function (data) {
+      console.log(data[0])
+      if (data[0].applied.length !== 0) {
+        var applied = document.getElementById("applied");
+        var appliedMobile = document.getElementById("collapseOne");
+        for (var i = data[0].applied.length - 1; i + 1 > data[0].applied.length - data[0].applied.length; i--) {
+          var card_id = data[0].applied[i]._id;
+          var company = data[0].applied[i].company;
+          var job_title = data[0].applied[i].job_title;
+          var phone_number = data[0].applied[i].phone_number;
+          var email = data[0].applied[i].email;
+          var link = data[0].applied[i].link;
+          var salary = data[0].applied[i].salary;
+          var location = data[0].applied[i].location;
+          var info = data[0].applied[i].info;
+          var date_created = data[0].applied[i].date_created;
+          var stamp = moment(date_created).format("l");
 
 
 
   
-//LOADING UP ALL JOBS
-const loadAllJobs = () => {
-  $.get(`/api/applied/`, function (data) {
-    if (data.length !== 0) {
-      var applied = document.getElementById("applied");
-      var appliedMobile = document.getElementById("collapseOne");
-      for (var i = data.length - 1; i + 1 > (data.length - data.length); i--) {
-        var card_id = data[i]._id;
-        var company = data[i].company;
-        var job_title = data[i].job_title;
-        var phone_number = data[i].phone_number;
-        var email = data[i].email;
-        var link = data[i].link;
-        var salary = data[i].salary;
-        var location = data[i].location;
-        var info = data[i].info;
-        var date_created = data[i].date_created;
-        var stamp = moment(date_created).format("l");
+// //LOADING UP ALL JOBS
+// const loadAllJobs = () => {
+//   $.get(`/api/applied/`, function (data) {
+//     if (data.length !== 0) {
+//       var applied = document.getElementById("applied");
+//       var appliedMobile = document.getElementById("collapseOne");
+//       for (var i = data.length - 1; i + 1 > (data.length - data.length); i--) {
+//         var card_id = data[i]._id;
+//         var company = data[i].company;
+//         var job_title = data[i].job_title;
+//         var phone_number = data[i].phone_number;
+//         var email = data[i].email;
+//         var link = data[i].link;
+//         var salary = data[i].salary;
+//         var location = data[i].location;
+//         var info = data[i].info;
+//         var date_created = data[i].date_created;
+//         var stamp = moment(date_created).format("l");
 
 
         var card = `
@@ -58,9 +77,9 @@ const loadAllJobs = () => {
     <div class="card-body collapse text-center" id="cardCollapse${card_id}">
       <h6 class="pb-1">Contact Info:</h6>
       <div class="btn-group pb-2" role="group" aria-label="Basic example">
-        <a class="btn btn-pink side-borders" href="tel:${phone_number}"> <i class="fas fa-phone"></i></a>
-        <a class="btn btn-pink side-borders" href="mailto:${email}""> <i class="fas fa-envelope"></i></a> 
-        <a class="btn btn-pink side-borders" target="_blank" href="https://${link}"> <i class="fas fa-link"></i></a>
+        <a class="btn btn-pink side-borders phone" href="tel:${phone_number}"> <i class="fas fa-phone"></i></a>
+        <a class="btn btn-pink side-borders email" href="mailto:${email}""> <i class="fas fa-envelope"></i></a> 
+        <a class="btn btn-pink side-borders link" target="_blank" href="https://${link}"> <i class="fas fa-link"></i></a>
       </div>
       <ul class="list-group">
         <li class="list-group-item">
@@ -77,7 +96,7 @@ const loadAllJobs = () => {
     <div class="card-footer">
     <span class="text-muted"> Applied:  ${stamp} </span>
       <i class="fas fa-trash-alt trash"></i>
-      <i class="fas fa-edit edit"></i>
+      <i class="fas fa-edit edit" data-toggle="modal" data-target="#editInfoModal"></i>
     </div>
   </div>
           `;
@@ -94,9 +113,9 @@ const loadAllJobs = () => {
       <div class="card-body collapse text-center" id="cardCollapse${card_id}">
         <h6 class="pb-1">Contact Info:</h6>
         <div class="btn-group pb-2" role="group" aria-label="Basic example">
-          <a class="btn btn-pink side-borders" href="tel:${phone_number}"> <i class="fas fa-phone"></i></a>
-          <a class="btn btn-pink side-borders" href="mailto:${email}""> <i class="fas fa-envelope"></i></a> 
-          <a class="btn btn-pink side-borders" target="_blank" href="https://${link}"> <i class="fas fa-link"></i></a>
+          <a class="btn btn-pink side-borders phone" href="tel:${phone_number}"> <i class="fas fa-phone"></i></a>
+          <a class="btn btn-pink side-borders email" href="mailto:${email}""> <i class="fas fa-envelope"></i></a> 
+          <a class="btn btn-pink side-borders link" target="_blank" href="https://${link}"> <i class="fas fa-link"></i></a>
         </div>
         <ul class="list-group">
           <li class="list-group-item">
@@ -114,7 +133,7 @@ const loadAllJobs = () => {
       <span class="text-muted"> Applied:  ${stamp} </span>
         <i class="fas fa-trash-alt trash"></i>
         <i class="fas fa-arrow-right"></i>
-        <i class="fas fa-edit edit"></i>
+        <i class="fas fa-edit edit" data-toggle="modal" data-target="#editInfoModal"></i>
       </div>
     </div>
             `;
@@ -125,22 +144,22 @@ const loadAllJobs = () => {
       }
     });
 
-    $.get(`/api/heardback/`, function(data) {
+    $.get(`/api/user/getjobs`, function (data) {
       if (data.length !== 0) {
         var heardBack = document.getElementById("heardBack");
         var heardMobile = document.getElementById("collapseTwo");
-        for (var i = data.length - 1; i + 1 > data.length - data.length; i--) {
-          var card_id = data[i]._id;
-          var company = data[i].company;
-          var job_title = data[i].job_title;
-          var phone_number = data[i].phone_number;
-          var email = data[i].email;
-          var link = data[i].link;
-          var salary = data[i].salary;
-          var location = data[i].location;
-          var info = data[i].info;
-          var date_created = data[i].date_created;
-          var stamp = moment(date_created).format("lll");
+        for (var i = data[0].heardback.length - 1; i + 1 > data[0].heardback.length - data[0].heardback.length; i--) {
+          var card_id = data[0].heardback[i]._id;
+          var company = data[0].heardback[i].company;
+          var job_title = data[0].heardback[i].job_title;
+          var phone_number = data[0].heardback[i].phone_number;
+          var email = data[0].heardback[i].email;
+          var link = data[0].heardback[i].link;
+          var salary = data[0].heardback[i].salary;
+          var location = data[0].heardback[i].location;
+          var info = data[0].heardback[i].info;
+          var date_created = data[0].heardback[i].date_created;
+          var stamp = moment(date_created).format("l");
 
           var card = `
         <div id="${card_id}" class="shadow-lg card mx-auto mb-3 mt-2" style="width: 18rem;">
@@ -154,9 +173,9 @@ const loadAllJobs = () => {
     <div class="card-body collapse text-center" id="cardCollapse${card_id}">
       <h6 class="pb-1">Contact Info:</h6>
       <div class="btn-group pb-2" role="group" aria-label="Basic example">
-        <a class="btn btn-pink side-borders" href="tel:${phone_number}"> <i class="fas fa-phone"></i></a>
-        <a class="btn btn-pink side-borders" href="mailto:${email}""> <i class="fas fa-envelope"></i></a> 
-        <a class="btn btn-pink side-borders" target="_blank" href="https://${link}"> <i class="fas fa-link"></i></a>
+        <a class="btn btn-pink side-borders phone" href="tel:${phone_number}"> <i class="fas fa-phone"></i></a>
+        <a class="btn btn-pink side-borders email" href="mailto:${email}""> <i class="fas fa-envelope"></i></a> 
+        <a class="btn btn-pink side-borders link" target="_blank" href="https://${link}"> <i class="fas fa-link"></i></a>
       </div>
       <ul class="list-group">
         <li class="list-group-item">
@@ -173,7 +192,7 @@ const loadAllJobs = () => {
     <div class="card-footer">
     <span class="text-muted"> Applied:  ${stamp} </span>
       <i class="fas fa-trash-alt trash"></i>
-      <i class="fas fa-edit edit"></i>
+      <i class="fas fa-edit edit" data-toggle="modal" data-target="#editInfoModal"></i>
     </div>
   </div>
           `;
@@ -190,9 +209,9 @@ const loadAllJobs = () => {
       <div class="card-body collapse text-center" id="cardCollapse${card_id}">
         <h6 class="pb-1">Contact Info:</h6>
         <div class="btn-group pb-2" role="group" aria-label="Basic example">
-          <a class="btn btn-pink side-borders" href="tel:${phone_number}"> <i class="fas fa-phone"></i></a>
-          <a class="btn btn-pink side-borders" href="mailto:${email}""> <i class="fas fa-envelope"></i></a> 
-          <a class="btn btn-pink side-borders" target="_blank" href="https://${link}"> <i class="fas fa-link"></i></a>
+          <a class="btn btn-pink side-borders phone" href="tel:${phone_number}"> <i class="fas fa-phone"></i></a>
+          <a class="btn btn-pink side-borders email" href="mailto:${email}""> <i class="fas fa-envelope"></i></a> 
+          <a class="btn btn-pink side-borders link" target="_blank" href="https://${link}"> <i class="fas fa-link"></i></a>
         </div>
         <ul class="list-group">
           <li class="list-group-item">
@@ -210,7 +229,7 @@ const loadAllJobs = () => {
       <span class="text-muted"> Applied:  ${stamp} </span>
         <i class="fas fa-trash-alt trash"></i>
         <i class="fas fa-arrow-right"></i>
-        <i class="fas fa-edit edit"></i>
+        <i class="fas fa-edit edit" data-toggle="modal" data-target="#editInfoModal"></i>
       </div>
     </div>
             `;
@@ -221,23 +240,23 @@ const loadAllJobs = () => {
       }
     });
 
-    $.get(`/api/offer/`, function(data) {
+    $.get(`/api/user/getjobs`, function (data) {
       if (data.length !== 0) {
         var offer = document.getElementById("offer");
         var offerMobile = document.getElementById("collapseThree");
 
-        for (var i = data.length - 1; i + 1 > data.length - data.length; i--) {
-          var card_id = data[i]._id;
-          var company = data[i].company;
-          var job_title = data[i].job_title;
-          var phone_number = data[i].phone_number;
-          var email = data[i].email;
-          var link = data[i].link;
-          var salary = data[i].salary;
-          var location = data[i].location;
-          var info = data[i].info;
-          var date_created = data[i].date_created;
-          var stamp = moment(date_created).format("lll");
+        for (var i = data[0].offer.length - 1; i + 1 > data[0].offer.length - data[0].offer.length; i--) {
+          var card_id = data[0].offer[i]._id;
+          var company = data[0].offer[i].company;
+          var job_title = data[0].offer[i].job_title;
+          var phone_number = data[0].offer[i].phone_number;
+          var email = data[0].offer[i].email;
+          var link = data[0].offer[i].link;
+          var salary = data[0].offer[i].salary;
+          var location = data[0].offer[i].location;
+          var info = data[0].offer[i].info;
+          var date_created = data[0].offer[i].date_created;
+          var stamp = moment(date_created).format("l");
 
           var card = `
         <div id="${card_id}" class="shadow-lg card mx-auto mb-3 mt-2" style="width: 18rem;">
@@ -251,9 +270,9 @@ const loadAllJobs = () => {
     <div class="card-body collapse text-center" id="cardCollapse${card_id}">
       <h6 class="pb-1">Contact Info:</h6>
       <div class="btn-group pb-2" role="group" aria-label="Basic example">
-        <a class="btn btn-pink side-borders" href="tel:${phone_number}"> <i class="fas fa-phone"></i></a>
-        <a class="btn btn-pink side-borders" href="mailto:${email}""> <i class="fas fa-envelope"></i></a> 
-        <a class="btn btn-pink side-borders" target="_blank" href="https://${link}"> <i class="fas fa-link"></i></a>
+        <a class="btn btn-pink side-borders phone" href="tel:${phone_number}"> <i class="fas fa-phone"></i></a>
+        <a class="btn btn-pink side-borders email" href="mailto:${email}""> <i class="fas fa-envelope"></i></a> 
+        <a class="btn btn-pink side-borders link" target="_blank" href="https://${link}"> <i class="fas fa-link"></i></a>
       </div>
       <ul class="list-group">
         <li class="list-group-item">
@@ -270,7 +289,7 @@ const loadAllJobs = () => {
     <div class="card-footer">
     <span class="text-muted"> Applied:  ${stamp} </span>
       <i class="fas fa-trash-alt trash"></i>
-      <i class="fas fa-edit edit"></i>
+      <i class="fas fa-edit edit" data-toggle="modal" data-target="#editInfoModal"></i>
     </div>
   </div>
           `;
@@ -287,9 +306,9 @@ const loadAllJobs = () => {
       <div class="card-body collapse text-center" id="cardCollapse${card_id}">
         <h6 class="pb-1">Contact Info:</h6>
         <div class="btn-group pb-2" role="group" aria-label="Basic example">
-          <a class="btn btn-pink side-borders" href="tel:${phone_number}"> <i class="fas fa-phone"></i></a>
-          <a class="btn btn-pink side-borders" href="mailto:${email}""> <i class="fas fa-envelope"></i></a> 
-          <a class="btn btn-pink side-borders" target="_blank" href="https://${link}"> <i class="fas fa-link"></i></a>
+          <a class="btn btn-pink side-borders phone" href="tel:${phone_number}"> <i class="fas fa-phone"></i></a>
+          <a class="btn btn-pink side-borders email" href="mailto:${email}""> <i class="fas fa-envelope"></i></a> 
+          <a class="btn btn-pink side-borders link" target="_blank" href="https://${link}"> <i class="fas fa-link"></i></a>
         </div>
         <ul class="list-group">
           <li class="list-group-item">
@@ -306,7 +325,7 @@ const loadAllJobs = () => {
       <div class="card-footer">
       <span class="text-muted"> Applied:  ${stamp} </span>
         <i class="fas fa-trash-alt trash"></i>
-        <i class="fas fa-edit edit"></i>
+        <i class="fas fa-edit edit" data-toggle="modal" data-target="#editInfoModal"></i>
       </div>
     </div>
             `;
@@ -321,7 +340,7 @@ const loadAllJobs = () => {
   loadAllJobs();
 
   //CREATING A NEW JOB BY SUBMITTING IT
-  $("#submit").on("click", function() {
+  $("#submit").on("click", function () {
     const newJob = {
       company: $("#company").val(),
       job_title: $("#title").val(),
@@ -340,15 +359,15 @@ const loadAllJobs = () => {
       method: "POST",
       url: "/api/applied",
       data: job
-    }).then(function() {
+    }).then(function () {
       Swal.fire({
         type: "success",
         title: "Your Job Has Been Saved!",
         showConfirmButton: false,
         timer: 1500
       });
-      setTimeout(function() {
-        location.reload();
+      setTimeout(function () {
+        window.location.reload();
       }, 1500);
     });
   };
@@ -360,7 +379,7 @@ const loadAllJobs = () => {
     document.getElementById("offer")
   ]);
 
-  drake.on("drop", function(el, target, source, sibling) {
+  drake.on("drop", function (el, target, source, sibling) {
     if (source.id === "applied" && target.id === "heardBack") {
       appliedHeardBack(el.id);
     } else if (source.id === "applied" && target.id === "offer") {
@@ -378,69 +397,149 @@ const loadAllJobs = () => {
     }
   });
 
-  $(document).on("click", ".fa-arrow-right", function() {
-    const arrow = $(this)[0];
-    const containerID = $(this)
-      .parent()
-      .parent()
-      .parent()
-      .parent()
-      .children()
-      .eq(1)[0].id;
-    const card = $(this)
-      .parent()
-      .parent()[0];
-    const jobID = $(this)
-      .parent()
-      .parent()[0].id;
+  // On click event to remove job
+  $(document).on('click', '.fa-trash-alt', function () {
 
-    if (containerID === "collapseOne") {
-      Swal.fire({
-        title: "Are you wanna move this to the next stage?",
-        text: "You won't be able to revert this!",
-        type: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#2e003e",
-        cancelButtonColor: "#c49991",
-        confirmButtonText: "Yes, delete it!"
-      }).then(result => {
-        if (result.value) {
-          appliedHeardBack(jobID);
-          $("#collapseTwo").append(card);
-          $("#collapseOne").remove(card);
-          Swal.fire({
-            title: "Congratulations",
-            text: "Keep on hustling!",
-            type: "success",
-            confirmButtonColor: "#2e003e"
-          });
-        }
-      });
-    } else if (containerID === "collapseTwo") {
-      Swal.fire({
-        title: "Are you wanna move this to the next stage?",
-        text: "You won't be able to revert this!",
-        type: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#2e003e",
-        cancelButtonColor: "#c49991",
-        confirmButtonText: "Yes, delete it!"
-      }).then(result => {
-        if (result.value) {
-          arrow.remove();
-          heardBackOffer(jobID);
-          $("#collapseThree").append(card);
-          $("#collapseTwo").remove(card);
-          Swal.fire({
-            title: "Congratulations",
-            text: "Keep on hustling!",
-            type: "success",
-            confirmButtonColor: "#2e003e"
-          });
-        }
-      });
-    } else {
-      console.log("There has been an error..");
-    }
+    const cardId = $(this).parents('.card')[0].id;
+    const cardLocation = $(this).parents()[2].id;
+
+    deleteJob(cardId, cardLocation)
   });
+
+  // Delete job function
+  const deleteJob = (id, location) => {
+
+    $.ajax({
+      url: `/api/${location}/${id}`,
+      method: 'DELETE'
+    }).then(response => {
+      console.log(response);
+      window.location.reload();
+    });
+  };
 });
+
+// Show edit job modal
+$(document).on('click', '.fa-edit', function () {
+  const cardId = $(this).parents('.card')[0].id;
+  const cardLocation = $(this).parents()[2].id;
+
+  $('#editInfoModal').data({'id': cardId, 'location': cardLocation})
+
+  $.ajax({
+    url: `/api/${cardLocation}/${cardId}`,
+    method: 'GET',
+  }).then(resultDB => {
+    console.log(resultDB);
+
+    // Set values of fields to information from DB
+    $('#edit-company').val(resultDB[0].company)
+    $('#edit-title').val(resultDB[0].job_title)
+    $('#edit-phone').val(resultDB[0].phone_number)
+    $('#edit-email').val(resultDB[0].email)
+    $('#edit-location').val(resultDB[0].location)
+    $('#edit-salary').val(resultDB[0].salary)
+    $('#edit-link').val(resultDB[0].link)
+    $('#edit-text-area').val(resultDB[0].info)
+
+  });
+
+});
+
+// Submit edited information event
+$('#confirmEdit').on('click', function () {
+  cardId = $(this).parents('#editInfoModal').data('id')
+  cardLocation = $(this).parents('#editInfoModal').data('location')
+
+  const editJob = {
+    company: $("#edit-company").val(),
+    job_title: $("#edit-title").val(),
+    phone_number: $("#edit-phone").val(),
+    email: $("#edit-email").val(),
+    link: $("#edit-link").val(),
+    location: $("#edit-location").val(),
+    salary: $("#edit-salary").val(),
+    info: $("#edit-text-area").val()
+  };
+
+  updateJobInfo(cardId, cardLocation, editJob);
+});
+
+// Update job information function
+const updateJobInfo = (id, location, updateInfo) => {
+
+  $.ajax({
+    url: `/api/${location}/${id}`,
+    method: 'PUT',
+    data: updateInfo
+  }).then(result => {
+    window.location.reload()
+  });
+};
+
+$(document).on("click", ".fa-arrow-right", function () {
+  const arrow = $(this)[0];
+  const containerID = $(this)
+    .parent()
+    .parent()
+    .parent()
+    .parent()
+    .children()
+    .eq(1)[0].id;
+  const card = $(this)
+    .parent()
+    .parent()[0];
+  const jobID = $(this)
+    .parent()
+    .parent()[0].id;
+
+  if (containerID === "collapseOne") {
+    Swal.fire({
+      title: "Are you wanna move this to the next stage?",
+      text: "You won't be able to revert this!",
+      type: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#2e003e",
+      cancelButtonColor: "#c49991",
+      confirmButtonText: "Yes, delete it!"
+    }).then(result => {
+      if (result.value) {
+        appliedHeardBack(jobID);
+        $("#collapseTwo").append(card);
+        $("#collapseOne").remove(card);
+        Swal.fire({
+          title: "Congratulations",
+          text: "Keep on hustling!",
+          type: "success",
+          confirmButtonColor: "#2e003e"
+        });
+      }
+    });
+  } else if (containerID === "collapseTwo") {
+    Swal.fire({
+      title: "Are you wanna move this to the next stage?",
+      text: "You won't be able to revert this!",
+      type: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#2e003e",
+      cancelButtonColor: "#c49991",
+      confirmButtonText: "Yes, delete it!"
+    }).then(result => {
+      if (result.value) {
+        arrow.remove();
+        heardBackOffer(jobID);
+        $("#collapseThree").append(card);
+        $("#collapseTwo").remove(card);
+        Swal.fire({
+          title: "Congratulations",
+          text: "Keep on hustling!",
+          type: "success",
+          confirmButtonColor: "#2e003e"
+        });
+      }
+    });
+  } else {
+    console.log("There has been an error..");
+  }
+});
+

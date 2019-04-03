@@ -1,6 +1,7 @@
 const appliedHeardBack = id => {
-  $.get(`/api/applied/${id}`, function(data) {
-    var card_id = data[0]._id;
+
+  $.get(`/api/applied/${id}`, function (data) {
+    console.log(data[0])
     var company = data[0].company;
     var job_title = data[0].job_title;
     var phone_number = data[0].phone_number;
@@ -12,7 +13,6 @@ const appliedHeardBack = id => {
     var date_created = data[0].date_created;
     var stamp = moment(date_created).format("lll");
     var card = {
-      card_id: card_id,
       company: company,
       job_title: job_title,
       phone_number: phone_number,
@@ -23,20 +23,30 @@ const appliedHeardBack = id => {
       info: info,
       date_created: stamp
     };
+
     $.ajax({
       method: "POST",
       url: "/api/heardback",
       data: card
+    }).then(function() {
+
+      $.ajax({
+        url: `/api/applied/heardback/${id}`,
+        method: 'POST'
+      });
+    });
+
+    $.ajax({
+      method: "DELETE",
+      url: `/api/applied/${id}`
     });
   });
-  $.ajax({
-    method: "Delete",
-    url: `/api/applied/${id}`
-  });
+
 };
 
 const appliedHeardBackMobile = id => {
   $.get(`/api/applied/${id}`, function(data) {
+    console.log(data)
     var card_id = data[0]._id;
     var company = data[0].company;
     var job_title = data[0].job_title;
@@ -73,7 +83,7 @@ const appliedHeardBackMobile = id => {
 };
 
 const appliedOffer = id => {
-  $.get(`/api/applied/${id}`, function(data) {
+  $.get(`/api/applied/${id}`, function (data) {
     var card_id = data[0]._id;
     var company = data[0].company;
     var job_title = data[0].job_title;
@@ -101,6 +111,11 @@ const appliedOffer = id => {
       method: "POST",
       url: "/api/offer",
       data: card
+    }).then(function() {
+      $.ajax({
+        url: `/api/applied/offer/${id}`,
+        method: 'POST'
+      });
     });
   });
   $.ajax({
@@ -110,7 +125,7 @@ const appliedOffer = id => {
 };
 
 const heardBackApplied = id => {
-  $.get(`/api/heardback/${id}`, function(data) {
+  $.get(`/api/heardback/${id}`, function (data) {
     var card_id = data[0]._id;
     var company = data[0].company;
     var job_title = data[0].job_title;
@@ -138,6 +153,11 @@ const heardBackApplied = id => {
       method: "POST",
       url: "/api/applied",
       data: card
+    }).then(function() {
+      $.ajax({
+        url: `/api/heardback/applied/${id}`,
+        method: 'POST'
+      });
     });
   });
   $.ajax({
@@ -147,7 +167,7 @@ const heardBackApplied = id => {
 };
 
 const heardBackOffer = id => {
-  $.get(`/api/heardback/${id}`, function(data) {
+  $.get(`/api/heardback/${id}`, function (data) {
     var card_id = data[0]._id;
     var company = data[0].company;
     var job_title = data[0].job_title;
@@ -175,6 +195,11 @@ const heardBackOffer = id => {
       method: "POST",
       url: "/api/offer",
       data: card
+    }).then(function() {
+      $.ajax({
+        url: `/api/heardback/offer/${id}`,
+        method: 'POST'
+      });
     });
   });
   $.ajax({
@@ -184,7 +209,7 @@ const heardBackOffer = id => {
 };
 
 const offerApplied = id => {
-  $.get(`/api/offer/${id}`, function(data) {
+  $.get(`/api/offer/${id}`, function (data) {
     var card_id = data[0]._id;
     var company = data[0].company;
     var job_title = data[0].job_title;
@@ -212,6 +237,11 @@ const offerApplied = id => {
       method: "POST",
       url: "/api/applied",
       data: card
+    }).then(function() {
+      $.ajax({
+        url: `/api/offer/applied/${id}`,
+        method: 'POST'
+      });
     });
   });
   $.ajax({
@@ -222,7 +252,7 @@ const offerApplied = id => {
 
 
 const offerHeardBack = id => {
-  $.get(`/api/offer/${id}`, function(data) {
+  $.get(`/api/offer/${id}`, function (data) {
     var card_id = data[0]._id;
     var company = data[0].company;
     var job_title = data[0].job_title;
@@ -250,6 +280,11 @@ const offerHeardBack = id => {
       method: "POST",
       url: "/api/heardback",
       data: card
+    }).then(function() {
+      $.ajax({
+        url: `/api/offer/heardback/${id}`,
+        method: 'POST'
+      });
     });
   });
   $.ajax({

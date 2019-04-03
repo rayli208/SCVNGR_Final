@@ -5,19 +5,23 @@ const passport = require('passport');
 
 router
   .route("/login")
-    .post(passport.authenticate('local'), userController.login)
+  .post(passport.authenticate('local'), userController.login)
 
 router
   .route("/logout")
   .get(userController.logout);
 
-router  
+router
   .route("/register")
   .post(userController.registerUser);
+
+router
+  .route('/getjobs')
+  .get(userController.getUserJobs);
 
 router
   .route("/:id")
   .get(userController.findUser)
   .delete(userController.deleteUser);
-  
-  module.exports = router;
+
+module.exports = router;
