@@ -7,6 +7,7 @@ module.exports = {
       .then(OfferDB => (
         db.User.findOneAndUpdate({ _id: req.user._id}, { $push: { offer: OfferDB._id } }, { new: true })
       ))
+      .then(OfferDB => res.json(OfferDB))
       .catch(err => console.log(err))
   },
 

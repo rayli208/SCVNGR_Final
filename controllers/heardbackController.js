@@ -8,6 +8,7 @@ module.exports = {
       .then(HeardBackDB => (
         db.User.findOneAndUpdate({ _id: req.user._id}, { $push: { heardback: HeardBackDB._id } }, { new: true })
       ))
+      .then(HeardbackDB => res.json(HeardbackDB))
       .catch(err => console.log(err))
   },
 

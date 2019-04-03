@@ -7,6 +7,7 @@ module.exports = {
       .then(AppliedDB => (
         db.User.findOneAndUpdate({ _id: req.user._id}, { $push: { applied: AppliedDB._id } }, { new: true })
       ))
+      .then(AppliedDB => res.json(AppliedDB))
       .catch(err => console.log(err))
   },
 
