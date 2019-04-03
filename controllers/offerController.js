@@ -17,34 +17,7 @@ module.exports = {
   },
 
   updateJob: function(req, res) {
-    const updateJobInfo = {};
-
-    if(req.body.job_title) {
-      updateJobInfo.job_title = req.body.job_title
-    }
-    if(req.body.phone_number) {
-      updateJobInfo.phone_number = req.body.phone_number
-    }
-    if(req.body.email) {
-      updateJobInfo.email = req.body.email
-    }
-    if(req.body.location) {
-      updateJobInfo.location = req.body.location
-    }
-    if(req.body.salary) {
-      updateJobInfo.salary = req.body.salary
-    }
-    if(req.body.link) {
-      updateJobInfo.link = req.body.link
-    }
-    if(req.body.info) {
-      updateJobInfo.info = req.body.info
-    }
-    if(req.body.positionId) {
-        updateJobInfo.positionId = req.body.positionId
-    }
-
-    db.Offer.findOneAndUpdate({_id: req.params.id}, {$set: updatedJobInfo}, {new:true})
+    db.Offer.findOneAndUpdate({_id: req.params.id}, {$set: req.body}, {new:true})
       .then(OfferDB => console.log(OfferDB))
       .catch(err => console.log(err))
       .finally(res.end());

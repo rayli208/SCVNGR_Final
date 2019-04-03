@@ -336,7 +336,8 @@ $(document).ready(function () {
       method: "POST",
       url: "/api/applied",
       data: job
-    }).then(function () {
+    }).then(function (res) {
+      console.log(res);
       Swal.fire({
         type: "success",
         title: "Your Job Has Been Saved!",
@@ -381,7 +382,7 @@ $(document).ready(function () {
     const cardLocation = $(this).parents()[2].id;
 
     deleteJob(cardId, cardLocation)
-  })
+  });
 
   // Delete job function
   const deleteJob = (id, location) => {
@@ -392,8 +393,8 @@ $(document).ready(function () {
     }).then(response => {
       console.log(response);
       window.location.reload();
-    })
-  }
+    });
+  };
 });
 
 // Show edit job modal
@@ -401,11 +402,15 @@ $(document).on('click', '.fa-edit', function () {
   const cardId = $(this).parents('.card')[0].id;
   const cardLocation = $(this).parents()[2].id;
 
+  $('#editInfoModal').data({'id': cardId, 'location': cardLocation})
+
   $.ajax({
     url: `/api/${cardLocation}/${cardId}`,
     method: 'GET',
   }).then(resultDB => {
-    console.log(resultDB[0])
+    console.log(resultDB);
+
+    // Set values of fields to information from DB
     $('#edit-company').val(resultDB[0].company)
     $('#edit-title').val(resultDB[0].job_title)
     $('#edit-phone').val(resultDB[0].phone_number)
@@ -414,39 +419,15 @@ $(document).on('click', '.fa-edit', function () {
     $('#edit-salary').val(resultDB[0].salary)
     $('#edit-link').val(resultDB[0].link)
     $('#edit-text-area').val(resultDB[0].info)
-  });
 
-  // Submit edit modal
-  $('#confirmEdit').on('click', function () {
-    const cardId = $(this).parents();
-    const cardLocation = $(this).parents()[2].id;
-
-    console.log(cardId)
-    console.log(cardLocation)
-
-    const editJob = {
-      company: $("#edit-company").val(),
-      job_title: $("#edit-title").val(),
-      phone_number: $("#edit-phone").val(),
-      email: $("#edit-email").val(),
-      link: $("#edit-link").val(),
-      location: $("#edit-location").val(),
-      salary: $("#edit-salary").val(),
-      info: $("#edit-text-area").val()
-    };
-
-    updateJobInfo(cardId, cardLocation, editJob)
   });
 
 });
 
-// Submit edit modal
+// Submit edited information event
 $('#confirmEdit').on('click', function () {
-  const cardId = $(this).parents();
-  const cardLocation = $(this).parents()[2].id;
-
-  console.log(cardId)
-  console.log(cardLocation)
+  cardId = $(this).parents('#editInfoModal').data('id')
+  cardLocation = $(this).parents('#editInfoModal').data('location')
 
   const editJob = {
     company: $("#edit-company").val(),
@@ -459,9 +440,10 @@ $('#confirmEdit').on('click', function () {
     info: $("#edit-text-area").val()
   };
 
-  updateJobInfo(cardId, cardLocation, editJob)
+  updateJobInfo(cardId, cardLocation, editJob);
 });
 
+// Update job information function
 const updateJobInfo = (id, location, updateInfo) => {
 
   $.ajax({
@@ -470,7 +452,7 @@ const updateJobInfo = (id, location, updateInfo) => {
     data: updateInfo
   }).then(result => {
     window.location.reload()
-  })
+  });
 };
 
 $(document).on("click", ".fa-arrow-right", function () {
