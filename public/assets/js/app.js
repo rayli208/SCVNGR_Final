@@ -412,8 +412,9 @@ $(document).ready(function () {
         cancelButtonColor: "#c49991",
         confirmButtonText: "Yes, delete it!"
       }).then(result => {
-        deleteJob(cardId, cardLocation)
+        
         if (result.value) {
+          deleteJob(cardId, cardLocation)
           arrow.remove();
           heardBackOffer(jobID);
           $("#collapseThree").append(card);
