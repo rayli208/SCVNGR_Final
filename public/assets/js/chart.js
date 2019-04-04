@@ -126,7 +126,7 @@ $(document).ready(function () {
       var ctx = $("#myChart2");
 
       var barGraph = new Chart(ctx, {
-        type: 'doughnut',
+        type: 'bar',
         data: chartdata,
         options: {
           scales: {
