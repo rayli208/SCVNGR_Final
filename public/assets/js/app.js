@@ -349,7 +349,7 @@ $(document).ready(function () {
       link: $("#link").val(),
       location: $("#location").val(),
       salary: $("#salary").val(),
-      info: $("#text-area").val()
+      info: $("#info").val()
     };
     submitJob(newJob);
   });
