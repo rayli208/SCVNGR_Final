@@ -403,7 +403,31 @@ $(document).ready(function () {
     const cardId = $(this).parents('.card')[0].id;
     const cardLocation = $(this).parents()[2].id;
 
-    deleteJob(cardId, cardLocation)
+       Swal.fire({
+        title: "Are you wanna move this to the next stage?",
+        text: "You won't be able to revert this!",
+        type: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#2e003e",
+        cancelButtonColor: "#c49991",
+        confirmButtonText: "Yes, delete it!"
+      }).then(result => {
+        deleteJob(cardId, cardLocation)
+        if (result.value) {
+          arrow.remove();
+          heardBackOffer(jobID);
+          $("#collapseThree").append(card);
+          $("#collapseTwo").remove(card);
+          Swal.fire({
+            title: "Congratulations",
+            text: "Keep on hustling!",
+            type: "success",
+            confirmButtonColor: "#2e003e"
+          });
+        }
+      });
+
+    // deleteJob(cardId, cardLocation)
   });
 
   // Delete job function
